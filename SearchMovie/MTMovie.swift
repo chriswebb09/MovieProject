@@ -22,6 +22,7 @@ struct MTMovie {
             self.year = year
             self.imdbID = imdbID
             self.imageURL = imageURL
+            
         } else {
             return nil
         }

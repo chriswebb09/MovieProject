@@ -10,23 +10,36 @@ import Foundation
 
 typealias JSON = [String : Any]
 
+enum Response {
+    case success(JSON), badURL(Error), badData(Error), badJSON(Error)
+}
+
+
 class MTAPIClient {
     
-    static func searchForMovie(_ string: String, handler: @escaping ([MTMovie]) -> Void) {
-        let session = URLSession.shared
-        let url = "http://www.omdbapi.com/?s=\(string.urlEncoded!)&page=2".asURL
-        let request = URLRequest(url: url)
-        var movies = [MTMovie]()
-        
-        session.dataTask(with: request) { data, response, error in
-            let json = convertDataToJSON(data)
-            guard let search = json?["Search"] as? [[String : String]] else { return }
-            for movie in 1..<search.count {
-                if let newMovie = MTMovie(search[movie]) {
-                    movies.append(newMovie)
+    
+    static func search(for query: String?, forPage page: String, completion: @escaping (_ results: MTSearchResults?) -> Void) {
+        let session = URLSession(configuration: .ephemeral)
+        if let encodedQuery = query?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),  let url = URL(string:"http://www.omdbapi.com/?s=\(encodedQuery)&page=\(page)") {
+            let request = URLRequest(url: url)
+            var movies = [MTMovie]()
+            
+            session.dataTask(with: request) { data, response, error in
+                let json = convertDataToJSON(data)
+                guard let search = json?["Search"] as? [[String : String]] else { return }
+                for movie in 1..<search.count {
+                    if let newMovie = MTMovie(search[movie]) {
+                        movies.append(newMovie)
+                    }
                 }
-            }; handler(movies) }.resume()
+                let results = MTSearchResults(movies: movies,
+                                              totalResults: "200",
+                                              response: .success(json!))
+                completion(results) }.resume()
+        }
     }
+    
+    
     
     static func convertDataToJSON(_ data: Data?) -> JSON? {
         guard let data = data else { return nil }

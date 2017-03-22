@@ -15,10 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        MTAPIClient.searchForMovie("batman") { movieData in
-            print(movieData)
+        MTAPIClient.search(for: "batman", forPage: "5") { movieData in
+            print(movieData?.response)
+            print(movieData?.movies)
+            
         }
-        
         return true
     }
 }
