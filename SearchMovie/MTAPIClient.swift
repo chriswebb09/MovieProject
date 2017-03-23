@@ -16,7 +16,7 @@ enum Response {
 
 class MTAPIClient {
     
-    static func search(for query: String?, forPage page: String, completion: @escaping (_ results: [[String: String]]) -> Void) {
+    static func search(for query: String?, forPage page: String, completion: @escaping (_ results: [[String: String]?]) -> Void) {
         let session = URLSession(configuration: .ephemeral)
         
         if let encodedQuery = query?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),

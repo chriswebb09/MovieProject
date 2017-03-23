@@ -10,16 +10,11 @@ import UIKit
 
 final class MTMovieDataStore {
     
-    private var movies: [MTMovie?]
     private var pageNumber = 1
     private var totalResults: String?
     private var response: Response?
     private var searchTerm: String?
-    
-    init() {
-        self.movies = [MTMovie]()
-    }
-    
+
     func fetchQuery(for movieQuery: String) {
         self.searchTerm = movieQuery
     }
@@ -31,12 +26,13 @@ final class MTMovieDataStore {
     func sendCall(completion: @escaping ([MTMovie?]) -> Void) {
         if let search = searchTerm {
             MTAPIClient.search(for: search, forPage: "5") { movieData in
+                var movies = [MTMovie]()
                 for movie in 1..<movieData.count {
-                    if let newMovie = MTMovie(movieData[movie]) {
-                        self.movies.append(newMovie)
+                    if let newMovie = MTMovie(movieData[movie]!) {
+                        movies.append(newMovie)
                     }
                 }
-                completion(self.movies)
+                completion(movies)
             }
         }
     }
