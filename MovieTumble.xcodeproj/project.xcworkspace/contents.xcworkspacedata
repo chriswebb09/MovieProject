@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:SearchMovie.xcodeproj">
+      location = "self:/Users/ChrisWebb/MovieProj/MovieProject/MovieTumble.xcodeproj">
    </FileRef>
 </Workspace>

@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A71AF53A1E82D2E900BBD264 /* MTMovieDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */; };
+		A71AF53C1E84816700BBD264 /* MTSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AF53B1E84816700BBD264 /* MTSearchViewController.swift */; };
+		A71AF53E1E8481A400BBD264 /* MTSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AF53D1E8481A400BBD264 /* MTSearchView.swift */; };
+		A71AF5401E8481E000BBD264 /* MTSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A71AF53F1E8481E000BBD264 /* MTSearchView.xib */; };
 		A72F6B601E81F2B50015BA6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */; };
-		A72F6B621E81F2B50015BA6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B611E81F2B50015BA6B /* ViewController.swift */; };
 		A72F6B671E81F2B50015BA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A72F6B661E81F2B50015BA6B /* Assets.xcassets */; };
 		A72F6B6A1E81F2B50015BA6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72F6B681E81F2B50015BA6B /* LaunchScreen.storyboard */; };
 		A72F6B751E81F2B50015BA6B /* SearchMovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B741E81F2B50015BA6B /* SearchMovieTests.swift */; };
 		A72F6B801E81F2B50015BA6B /* SearchMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B7F1E81F2B50015BA6B /* SearchMovieUITests.swift */; };
+		A72F6B8E1E81FEF50015BA6B /* MTMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */; };
+		A72F6B901E81FF060015BA6B /* MTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,18 +38,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A72F6B5C1E81F2B50015BA6B /* SearchMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovieDataStore.swift; sourceTree = "<group>"; };
+		A71AF53B1E84816700BBD264 /* MTSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTSearchViewController.swift; sourceTree = "<group>"; };
+		A71AF53D1E8481A400BBD264 /* MTSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MTSearchView.swift; path = ../MTSearchView.swift; sourceTree = "<group>"; };
+		A71AF53F1E8481E000BBD264 /* MTSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTSearchView.xib; sourceTree = "<group>"; };
+		A72F6B5C1E81F2B50015BA6B /* MovieTumble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTumble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A72F6B611E81F2B50015BA6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A72F6B661E81F2B50015BA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A72F6B691E81F2B50015BA6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A72F6B6B1E81F2B50015BA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A72F6B701E81F2B50015BA6B /* SearchMovieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SearchMovieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A72F6B701E81F2B50015BA6B /* MovieTumbleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieTumbleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72F6B741E81F2B50015BA6B /* SearchMovieTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieTests.swift; sourceTree = "<group>"; };
 		A72F6B761E81F2B50015BA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A72F6B7B1E81F2B50015BA6B /* SearchMovieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SearchMovieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A72F6B7B1E81F2B50015BA6B /* MovieTumbleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieTumbleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72F6B7F1E81F2B50015BA6B /* SearchMovieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieUITests.swift; sourceTree = "<group>"; };
 		A72F6B811E81F2B50015BA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovie.swift; sourceTree = "<group>"; };
+		A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +95,9 @@
 		A72F6B5D1E81F2B50015BA6B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A72F6B5C1E81F2B50015BA6B /* SearchMovie.app */,
-				A72F6B701E81F2B50015BA6B /* SearchMovieTests.xctest */,
-				A72F6B7B1E81F2B50015BA6B /* SearchMovieUITests.xctest */,
+				A72F6B5C1E81F2B50015BA6B /* MovieTumble.app */,
+				A72F6B701E81F2B50015BA6B /* MovieTumbleTests.xctest */,
+				A72F6B7B1E81F2B50015BA6B /* MovieTumbleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,8 +105,13 @@
 		A72F6B5E1E81F2B50015BA6B /* SearchMovie */ = {
 			isa = PBXGroup;
 			children = (
+				A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */,
+				A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */,
+				A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */,
 				A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */,
-				A72F6B611E81F2B50015BA6B /* ViewController.swift */,
+				A71AF53D1E8481A400BBD264 /* MTSearchView.swift */,
+				A71AF53F1E8481E000BBD264 /* MTSearchView.xib */,
+				A71AF53B1E84816700BBD264 /* MTSearchViewController.swift */,
 				A72F6B661E81F2B50015BA6B /* Assets.xcassets */,
 				A72F6B681E81F2B50015BA6B /* LaunchScreen.storyboard */,
 				A72F6B6B1E81F2B50015BA6B /* Info.plist */,
@@ -125,9 +140,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A72F6B5B1E81F2B50015BA6B /* SearchMovie */ = {
+		A72F6B5B1E81F2B50015BA6B /* MovieTumble */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A72F6B841E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "SearchMovie" */;
+			buildConfigurationList = A72F6B841E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "MovieTumble" */;
 			buildPhases = (
 				A72F6B581E81F2B50015BA6B /* Sources */,
 				A72F6B591E81F2B50015BA6B /* Frameworks */,
@@ -137,14 +152,14 @@
 			);
 			dependencies = (
 			);
-			name = SearchMovie;
+			name = MovieTumble;
 			productName = SearchMovie;
-			productReference = A72F6B5C1E81F2B50015BA6B /* SearchMovie.app */;
+			productReference = A72F6B5C1E81F2B50015BA6B /* MovieTumble.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A72F6B6F1E81F2B50015BA6B /* SearchMovieTests */ = {
+		A72F6B6F1E81F2B50015BA6B /* MovieTumbleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A72F6B871E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "SearchMovieTests" */;
+			buildConfigurationList = A72F6B871E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "MovieTumbleTests" */;
 			buildPhases = (
 				A72F6B6C1E81F2B50015BA6B /* Sources */,
 				A72F6B6D1E81F2B50015BA6B /* Frameworks */,
@@ -155,14 +170,14 @@
 			dependencies = (
 				A72F6B721E81F2B50015BA6B /* PBXTargetDependency */,
 			);
-			name = SearchMovieTests;
+			name = MovieTumbleTests;
 			productName = SearchMovieTests;
-			productReference = A72F6B701E81F2B50015BA6B /* SearchMovieTests.xctest */;
+			productReference = A72F6B701E81F2B50015BA6B /* MovieTumbleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A72F6B7A1E81F2B50015BA6B /* SearchMovieUITests */ = {
+		A72F6B7A1E81F2B50015BA6B /* MovieTumbleUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A72F6B8A1E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "SearchMovieUITests" */;
+			buildConfigurationList = A72F6B8A1E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "MovieTumbleUITests" */;
 			buildPhases = (
 				A72F6B771E81F2B50015BA6B /* Sources */,
 				A72F6B781E81F2B50015BA6B /* Frameworks */,
@@ -173,9 +188,9 @@
 			dependencies = (
 				A72F6B7D1E81F2B50015BA6B /* PBXTargetDependency */,
 			);
-			name = SearchMovieUITests;
+			name = MovieTumbleUITests;
 			productName = SearchMovieUITests;
-			productReference = A72F6B7B1E81F2B50015BA6B /* SearchMovieUITests.xctest */;
+			productReference = A72F6B7B1E81F2B50015BA6B /* MovieTumbleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -207,7 +222,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A72F6B571E81F2B50015BA6B /* Build configuration list for PBXProject "SearchMovie" */;
+			buildConfigurationList = A72F6B571E81F2B50015BA6B /* Build configuration list for PBXProject "MovieTumble" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -220,9 +235,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A72F6B5B1E81F2B50015BA6B /* SearchMovie */,
-				A72F6B6F1E81F2B50015BA6B /* SearchMovieTests */,
-				A72F6B7A1E81F2B50015BA6B /* SearchMovieUITests */,
+				A72F6B5B1E81F2B50015BA6B /* MovieTumble */,
+				A72F6B6F1E81F2B50015BA6B /* MovieTumbleTests */,
+				A72F6B7A1E81F2B50015BA6B /* MovieTumbleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -234,6 +249,7 @@
 			files = (
 				A72F6B6A1E81F2B50015BA6B /* LaunchScreen.storyboard in Resources */,
 				A72F6B671E81F2B50015BA6B /* Assets.xcassets in Resources */,
+				A71AF5401E8481E000BBD264 /* MTSearchView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +274,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A72F6B621E81F2B50015BA6B /* ViewController.swift in Sources */,
+				A72F6B8E1E81FEF50015BA6B /* MTMovie.swift in Sources */,
+				A71AF53C1E84816700BBD264 /* MTSearchViewController.swift in Sources */,
+				A71AF53A1E82D2E900BBD264 /* MTMovieDataStore.swift in Sources */,
+				A71AF53E1E8481A400BBD264 /* MTSearchView.swift in Sources */,
+				A72F6B901E81FF060015BA6B /* MTAPIClient.swift in Sources */,
 				A72F6B601E81F2B50015BA6B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,12 +304,12 @@
 /* Begin PBXTargetDependency section */
 		A72F6B721E81F2B50015BA6B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A72F6B5B1E81F2B50015BA6B /* SearchMovie */;
+			target = A72F6B5B1E81F2B50015BA6B /* MovieTumble */;
 			targetProxy = A72F6B711E81F2B50015BA6B /* PBXContainerItemProxy */;
 		};
 		A72F6B7D1E81F2B50015BA6B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A72F6B5B1E81F2B50015BA6B /* SearchMovie */;
+			target = A72F6B5B1E81F2B50015BA6B /* MovieTumble */;
 			targetProxy = A72F6B7C1E81F2B50015BA6B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -434,7 +454,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.froleeyo.SearchMovieTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SearchMovie.app/SearchMovie";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieTumble.app/MovieTumble";
 			};
 			name = Debug;
 		};
@@ -449,7 +469,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.froleeyo.SearchMovieTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SearchMovie.app/SearchMovie";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieTumble.app/MovieTumble";
 			};
 			name = Release;
 		};
@@ -484,7 +504,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A72F6B571E81F2B50015BA6B /* Build configuration list for PBXProject "SearchMovie" */ = {
+		A72F6B571E81F2B50015BA6B /* Build configuration list for PBXProject "MovieTumble" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A72F6B821E81F2B50015BA6B /* Debug */,
@@ -493,29 +513,32 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A72F6B841E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "SearchMovie" */ = {
+		A72F6B841E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "MovieTumble" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A72F6B851E81F2B50015BA6B /* Debug */,
 				A72F6B861E81F2B50015BA6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		A72F6B871E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "SearchMovieTests" */ = {
+		A72F6B871E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "MovieTumbleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A72F6B881E81F2B50015BA6B /* Debug */,
 				A72F6B891E81F2B50015BA6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		A72F6B8A1E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "SearchMovieUITests" */ = {
+		A72F6B8A1E81F2B50015BA6B /* Build configuration list for PBXNativeTarget "MovieTumbleUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A72F6B8B1E81F2B50015BA6B /* Debug */,
 				A72F6B8C1E81F2B50015BA6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
