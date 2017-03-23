@@ -16,11 +16,11 @@ final class MTMovieDataStore {
     private var searchTerm: String?
 
     func fetchQuery(for movieQuery: String) {
-        self.searchTerm = movieQuery
+        searchTerm = movieQuery
     }
     
     func fetchNextPage() {
-        self.pageNumber += 1
+        pageNumber += 1
     }
     
     func sendCall(completion: @escaping ([MTMovie?]) -> Void) {
