@@ -10,6 +10,14 @@ import UIKit
 
 class MTSearchView: UIView {
     
+    
+    @IBOutlet weak var searchTitleLabel: UILabel! {
+        didSet {
+            searchTitleLabel.text = "Search for movie"
+            searchTitleLabel.sizeToFit()
+        }
+    }
+    
     @IBOutlet var contentView: UIView! {
         didSet {
              contentView.backgroundColor = .white
@@ -61,6 +69,10 @@ class MTSearchView: UIView {
         contentView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
+        commonConstraints(for: searchTitleLabel)
+        searchTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: SearchViewConstants.titleLabelCenterYOffset).isActive = true
+        searchTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: SearchViewConstants.buttonWidthMultiplier).isActive = true
+        searchTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: SearchViewConstants.heightMultiplier).isActive = true
         
         commonConstraints(for: searchField)
         searchField.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -83,6 +95,7 @@ class MTSearchView: UIView {
 
 struct SearchViewConstants {
     static let buttonCenterYOffeset: CGFloat = UIScreen.main.bounds.height * 0.2
+    static let titleLabelCenterYOffset: CGFloat = UIScreen.main.bounds.height * -0.2
     static let buttonWidthMultiplier: CGFloat = 0.4
     static let heightMultiplier: CGFloat =  0.08
     static let searchFieldWidthMultiplier: CGFloat = 0.7

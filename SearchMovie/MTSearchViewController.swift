@@ -34,29 +34,26 @@ class MTSearchViewController: UIViewController {
     }
     
     func onSearch() {
-        let searchTerm = searchView.searchField.text
-        if let searchText = searchTerm {
-            store.fetchQuery(for: searchText)
-            store.sendCall { movies in
-                print(movies)
-                for movie in movies {
-                    if let posterURL = movie?.imageURL {
-                        self.store.downloadImage(url: posterURL) { posterImage in
-                            dump(posterImage)
-                        }
-                    }
-                    
+        guard let searchTerm = searchView.searchField.text else { return }
+        searchView.searchField.text = nil
+        store.fetchQuery(for: searchTerm)
+        store.sendCall { movies in
+            guard let movieCollection = movies else { return }
+            for movie in movieCollection {
+                guard let posterURL = movie.imageURL else { return }
+                self.store.downloadImage(url: posterURL) { posterImage in
+                    dump(posterImage)
                 }
             }
         }
-        searchView.searchField.text = nil
     }
 }
 
 extension UIViewController {
     
     func hideKeyboardOnTap() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     

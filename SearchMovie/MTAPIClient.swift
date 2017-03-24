@@ -23,8 +23,7 @@ class MTAPIClient {
     
     static func downloadData(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         let session = URLSession(configuration: .ephemeral)
-        let urlRequest = URLRequest(url:url)
-        print(url)
+        let urlRequest = URLRequest(url: url)
         session.dataTask(with: urlRequest) { data, response, error in
             completion(data, response, error)
         }.resume()
