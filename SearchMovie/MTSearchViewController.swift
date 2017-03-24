@@ -10,19 +10,16 @@ import UIKit
 
 class MTSearchViewController: UIViewController {
     
-    var store = MTMovieDataStore()
-
+    var store: MTMovieDataStore
+    
     @IBOutlet var searchView: MTSearchView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view = searchView
-        searchView.searchButton.addTarget(self,
-                                          action: #selector(onSearch),
-                                          for: .touchUpInside)
+        searchView.searchButton.addTarget(self, action: #selector(onSearch), for: .touchUpInside)
     }
     
-   
     init(_ coder: NSCoder? = nil, store: MTMovieDataStore = MTMovieDataStore()) {
         self.store = store
         if let coder = coder {
@@ -36,7 +33,6 @@ class MTSearchViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func onSearch() {
         let searchTerm = searchView.searchField.text
         if let searchText = searchTerm {
@@ -45,6 +41,7 @@ class MTSearchViewController: UIViewController {
                 print(movie)
             }
         }
+        searchView.searchField.text = nil
     }
 }
 

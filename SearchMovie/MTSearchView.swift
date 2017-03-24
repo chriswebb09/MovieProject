@@ -16,8 +16,20 @@ class MTSearchView: UIView {
         }
     }
     
-    @IBOutlet weak var searchField: UITextField!
-    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var searchField: UITextField! {
+        didSet {
+            searchField.layer.cornerRadius = 4
+            searchField.layer.borderColor = UIColor.lightGray.cgColor
+            searchField.layer.borderWidth = 1
+        }
+    }
+    @IBOutlet weak var searchButton: UIButton! {
+        didSet {
+            searchButton.layer.cornerRadius = 4
+            searchButton.layer.borderColor = UIColor.lightGray.cgColor
+            searchButton.layer.borderWidth = 1
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,23 +55,27 @@ class MTSearchView: UIView {
     
     func setupConstraints() {
         
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        commonConstraints(for: contentView)
         contentView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         contentView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
-        searchField.translatesAutoresizingMaskIntoConstraints = false
-        searchField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        searchField.centerYAnchor.constraint(equalTo:centerYAnchor).isActive = true
+        
+        commonConstraints(for: contentView)
+        searchField.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         searchField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: SearchViewConstants.searchFieldWidthMultiplier).isActive = true
         searchField.heightAnchor.constraint(equalTo: heightAnchor, multiplier: SearchViewConstants.heightMultiplier).isActive = true
         
-        searchButton.translatesAutoresizingMaskIntoConstraints = false
-        searchButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        commonConstraints(for: searchButton)
         searchButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: SearchViewConstants.buttonCenterYOffeset).isActive = true
         searchButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: SearchViewConstants.buttonWidthMultiplier).isActive = true
         searchButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: SearchViewConstants.heightMultiplier).isActive = true
+    }
+    
+    func commonConstraints(for element: UIView) {
+        element.translatesAutoresizingMaskIntoConstraints = false
+        element.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
 
 }
