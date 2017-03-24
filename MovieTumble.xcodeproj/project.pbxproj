@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A71AF53A1E82D2E900BBD264 /* MTMovieDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */; };
-		A71AF53C1E84816700BBD264 /* MTSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AF53B1E84816700BBD264 /* MTSearchViewController.swift */; };
-		A71AF53E1E8481A400BBD264 /* MTSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AF53D1E8481A400BBD264 /* MTSearchView.swift */; };
 		A71AF5401E8481E000BBD264 /* MTSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A71AF53F1E8481E000BBD264 /* MTSearchView.xib */; };
 		A72F6B601E81F2B50015BA6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */; };
 		A72F6B671E81F2B50015BA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A72F6B661E81F2B50015BA6B /* Assets.xcassets */; };
@@ -18,6 +16,9 @@
 		A72F6B801E81F2B50015BA6B /* SearchMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B7F1E81F2B50015BA6B /* SearchMovieUITests.swift */; };
 		A72F6B8E1E81FEF50015BA6B /* MTMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */; };
 		A72F6B901E81FF060015BA6B /* MTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */; };
+		A7B10DB81E8488C200397DA6 /* MTSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B10DB71E8488C200397DA6 /* MTSearchView.swift */; };
+		A7B10DBD1E84933800397DA6 /* MTSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B10DBB1E84933800397DA6 /* MTSearchViewController.swift */; };
+		A7B10DBE1E84933800397DA6 /* MTSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7B10DBC1E84933800397DA6 /* MTSearchViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +40,6 @@
 
 /* Begin PBXFileReference section */
 		A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovieDataStore.swift; sourceTree = "<group>"; };
-		A71AF53B1E84816700BBD264 /* MTSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTSearchViewController.swift; sourceTree = "<group>"; };
-		A71AF53D1E8481A400BBD264 /* MTSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MTSearchView.swift; path = ../MTSearchView.swift; sourceTree = "<group>"; };
 		A71AF53F1E8481E000BBD264 /* MTSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTSearchView.xib; sourceTree = "<group>"; };
 		A72F6B5C1E81F2B50015BA6B /* MovieTumble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTumble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +54,9 @@
 		A72F6B811E81F2B50015BA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovie.swift; sourceTree = "<group>"; };
 		A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTAPIClient.swift; sourceTree = "<group>"; };
+		A7B10DB71E8488C200397DA6 /* MTSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTSearchView.swift; sourceTree = "<group>"; };
+		A7B10DBB1E84933800397DA6 /* MTSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTSearchViewController.swift; sourceTree = "<group>"; };
+		A7B10DBC1E84933800397DA6 /* MTSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTSearchViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +111,10 @@
 				A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */,
 				A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */,
 				A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */,
-				A71AF53D1E8481A400BBD264 /* MTSearchView.swift */,
+				A7B10DB71E8488C200397DA6 /* MTSearchView.swift */,
 				A71AF53F1E8481E000BBD264 /* MTSearchView.xib */,
-				A71AF53B1E84816700BBD264 /* MTSearchViewController.swift */,
+				A7B10DBB1E84933800397DA6 /* MTSearchViewController.swift */,
+				A7B10DBC1E84933800397DA6 /* MTSearchViewController.xib */,
 				A72F6B661E81F2B50015BA6B /* Assets.xcassets */,
 				A72F6B681E81F2B50015BA6B /* LaunchScreen.storyboard */,
 				A72F6B6B1E81F2B50015BA6B /* Info.plist */,
@@ -248,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A72F6B6A1E81F2B50015BA6B /* LaunchScreen.storyboard in Resources */,
+				A7B10DBE1E84933800397DA6 /* MTSearchViewController.xib in Resources */,
 				A72F6B671E81F2B50015BA6B /* Assets.xcassets in Resources */,
 				A71AF5401E8481E000BBD264 /* MTSearchView.xib in Resources */,
 			);
@@ -275,9 +279,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A72F6B8E1E81FEF50015BA6B /* MTMovie.swift in Sources */,
-				A71AF53C1E84816700BBD264 /* MTSearchViewController.swift in Sources */,
+				A7B10DBD1E84933800397DA6 /* MTSearchViewController.swift in Sources */,
 				A71AF53A1E82D2E900BBD264 /* MTMovieDataStore.swift in Sources */,
-				A71AF53E1E8481A400BBD264 /* MTSearchView.swift in Sources */,
+				A7B10DB81E8488C200397DA6 /* MTSearchView.swift in Sources */,
 				A72F6B901E81FF060015BA6B /* MTAPIClient.swift in Sources */,
 				A72F6B601E81F2B50015BA6B /* AppDelegate.swift in Sources */,
 			);

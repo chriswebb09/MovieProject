@@ -18,7 +18,6 @@ class MTAPIClient {
     
     static func search(for query: String?, forPage page: String, completion: @escaping (_ results: [[String: String]?]) -> Void) {
         let session = URLSession(configuration: .ephemeral)
-        
         if let encodedQuery = query?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             let url = URL(string:"http://www.omdbapi.com/?s=\(encodedQuery)&page=\(page)") {
             let request = URLRequest(url: url)

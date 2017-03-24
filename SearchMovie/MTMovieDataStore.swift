@@ -25,7 +25,7 @@ final class MTMovieDataStore {
     
     func sendCall(completion: @escaping ([MTMovie?]) -> Void) {
         if let search = searchTerm {
-            MTAPIClient.search(for: search, forPage: "5") { movieData in
+            MTAPIClient.search(for: search, forPage: String(pageNumber)) { movieData in
                 var movies = [MTMovie]()
                 for movie in 1..<movieData.count {
                     if let newMovie = MTMovie(movieData[movie]!) {
