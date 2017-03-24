@@ -13,16 +13,19 @@ struct MTMovie {
     let title: String
     let year: String
     let imdbID: String
-    let imageURL: String
+    let imageURL: URL?
     
-    init?(_ json: [String : String]) {
-        if json["Type"] != "movie" { return nil }
-        if let title = json["Title"], let imdbID = json["imdbID"], let year = json["Year"], let imageURL = json["Poster"] {
+    init?(_ json: [String : Any]) {
+        if let title = json["Title"] as? String,
+            let imdbID = json["imdbID"] as? String,
+            let year = json["Year"] as? String,
+            let imageURL = json["Poster"] as? String,
+            let type = json["Type"] as? String,
+            type == "movie"{
             self.title = title
             self.year = year
             self.imdbID = imdbID
-            self.imageURL = imageURL
-            
+            self.imageURL = URL(string: imageURL)
         } else {
             return nil
         }

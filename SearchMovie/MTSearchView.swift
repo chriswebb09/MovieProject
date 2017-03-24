@@ -21,6 +21,7 @@ class MTSearchView: UIView {
             searchField.layer.cornerRadius = 4
             searchField.layer.borderColor = UIColor.lightGray.cgColor
             searchField.layer.borderWidth = 1
+            searchField.borderStyle = UITextBorderStyle.roundedRect
         }
     }
     @IBOutlet weak var searchButton: UIButton! {

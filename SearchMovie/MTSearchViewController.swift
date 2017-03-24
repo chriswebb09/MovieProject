@@ -37,8 +37,16 @@ class MTSearchViewController: UIViewController {
         let searchTerm = searchView.searchField.text
         if let searchText = searchTerm {
             store.fetchQuery(for: searchText)
-            store.sendCall { movie in
-                print(movie)
+            store.sendCall { movies in
+                print(movies)
+                for movie in movies {
+                    if let posterURL = movie?.imageURL {
+                        self.store.downloadImage(url: posterURL) { posterImage in
+                            dump(posterImage)
+                        }
+                    }
+                    
+                }
             }
         }
         searchView.searchField.text = nil

@@ -23,16 +23,37 @@ final class MTMovieDataStore {
         pageNumber += 1
     }
     
+    func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
+        MTAPIClient.downloadData(url: url) { data, response, error in
+            if let imageData = data {
+                completion(UIImage(data: imageData))
+            }
+        }
+    }
+    
     func sendCall(completion: @escaping ([MTMovie?]) -> Void) {
         if let search = searchTerm {
             MTAPIClient.search(for: search, forPage: String(pageNumber)) { movieData in
-                var movies = [MTMovie]()
-                for movie in 1..<movieData.count {
-                    if let newMovie = MTMovie(movieData[movie]!) {
-                        movies.append(newMovie)
+                switch movieData {
+                case .success(let json):
+                    guard let search = json["Search"] as? [[String : String]] else { return }
+                    var movies = [MTMovie]()
+                    for movie in 0..<search.count {
+                        if let newMovie = MTMovie(search[movie]) {
+                            movies.append(newMovie)
+                        }
                     }
+                    completion(movies)
+                case .badData(let error):
+                    print(error.localizedDescription)
+                    return
+                case .badJSON(let error):
+                    print(error.localizedDescription)
+                    return
+                default:
+                    print(movieData)
+                    return
                 }
-                completion(movies)
             }
         }
     }
