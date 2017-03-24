@@ -61,7 +61,7 @@ class MTSearchView: UIView {
         contentView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
         
-        commonConstraints(for: contentView)
+        commonConstraints(for: searchField)
         searchField.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         searchField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: SearchViewConstants.searchFieldWidthMultiplier).isActive = true
         searchField.heightAnchor.constraint(equalTo: heightAnchor, multiplier: SearchViewConstants.heightMultiplier).isActive = true
