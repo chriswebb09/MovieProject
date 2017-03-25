@@ -22,27 +22,47 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mb-cK-Yin">
-                    <rect key="frame" x="154" y="462" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iH8-8l-UYD">
-                    <rect key="frame" x="129" y="284" width="97" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iH8-8l-UYD">
+                    <rect key="frame" x="62.5" y="308.5" width="250" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="A8n-mY-r7a"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="pKF-8i-bpS"/>
+                        <constraint firstAttribute="height" constant="50" id="u4M-qi-idX"/>
+                    </constraints>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4O-x9-mbn">
-                    <rect key="frame" x="166" y="147" width="42" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4O-x9-mbn">
+                    <rect key="frame" x="87" y="147" width="200" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="NKM-iU-I09"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mb-cK-Yin">
+                    <rect key="frame" x="127.5" y="449" width="120" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="HLV-EQ-GPS"/>
+                        <constraint firstAttribute="width" constant="120" id="YtS-hr-2Sf"/>
+                        <constraint firstAttribute="height" constant="50" id="n5T-l6-PFF"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="X4O-x9-mbn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0XH-n9-yts"/>
+                <constraint firstItem="iH8-8l-UYD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Emf-7Z-k0e"/>
+                <constraint firstItem="X4O-x9-mbn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="KEQ-nb-EvS"/>
+                <constraint firstItem="iH8-8l-UYD" firstAttribute="centerX" secondItem="7mb-cK-Yin" secondAttribute="centerX" id="RV3-Cl-7pZ"/>
+                <constraint firstItem="X4O-x9-mbn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="147" id="bpE-ze-eH9"/>
+                <constraint firstItem="iH8-8l-UYD" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hZx-AY-wz9"/>
+                <constraint firstAttribute="bottom" secondItem="7mb-cK-Yin" secondAttribute="bottom" constant="168" id="qfu-Sf-q0u"/>
+                <constraint firstItem="iH8-8l-UYD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="rUz-pF-VjP"/>
+            </constraints>
             <point key="canvasLocation" x="34.5" y="121.5"/>
         </view>
     </objects>

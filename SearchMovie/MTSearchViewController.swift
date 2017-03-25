@@ -11,20 +11,17 @@ import UIKit
 class MTSearchViewController: UIViewController {
     
     fileprivate var dataStore: MTMovieDataStore
-    
     @IBOutlet var searchView: MTSearchView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = searchView
+        searchView.frame = view.frame
         searchView.searchButton.addTarget(self, action: #selector(onSearch), for: .touchUpInside)
     }
     
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        self.dataStore = MTMovieDataStore()
+        self.dataStore = MTMovieDataStore(searchQuery: "")
         super.init(nibName: "MTSearchViewController", bundle: nil)
-        
     }
     
     convenience init(dataStore: MTMovieDataStore) {
@@ -40,19 +37,22 @@ class MTSearchViewController: UIViewController {
         guard let searchTerm = searchView.searchField.text else { return }
         searchView.searchField.text = nil
         dataStore.fetchQuery(for: searchTerm)
-        dataStore.sendCall { movies in
-            guard let movieCollection = movies else { return }
-            for movie in movieCollection {
-                guard let posterURL = movie.imageURL else { return }
-                self.dataStore.downloadImage(url: posterURL) { posterImage in
-                    dump(posterImage)
+        dataStore.fetchNextPage { [weak self] pageNumber in
+            self?.dataStore.sendCall(pageNumber: pageNumber) { movies in
+                guard let movieCollection = movies else { return }
+                for movie in movieCollection {
+                    self?.dataStore.downloadImage(url: movie.imageURL) { posterImage in
+                        dump(posterImage)
+                    }
                 }
             }
         }
+       
     }
     
     func hideKeyboardOnTap() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     
