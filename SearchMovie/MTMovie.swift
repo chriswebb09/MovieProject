@@ -13,7 +13,7 @@ struct MTMovie {
     let title: String
     let year: String
     let imdbID: String
-    let imageURL: URL?
+    let imageURL: URL
     
     init?(_ json: [String : Any]) {
         if let title = json["Title"] as? String,
@@ -25,7 +25,7 @@ struct MTMovie {
             self.title = title
             self.year = year
             self.imdbID = imdbID
-            self.imageURL = URL(string: imageURL)
+            self.imageURL = URL(string: imageURL)!
         } else {
             return nil
         }

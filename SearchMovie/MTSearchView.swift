@@ -10,35 +10,10 @@ import UIKit
 
 class MTSearchView: UIView {
     
-    
-    @IBOutlet weak var searchTitleLabel: UILabel! {
-        didSet {
-            searchTitleLabel.text = "Search for movie"
-            searchTitleLabel.sizeToFit()
-        }
-    }
-    
-    @IBOutlet var contentView: UIView! {
-        didSet {
-             contentView.backgroundColor = .white
-        }
-    }
-    
-    @IBOutlet weak var searchField: UITextField! {
-        didSet {
-            searchField.layer.cornerRadius = 4
-            searchField.layer.borderColor = UIColor.lightGray.cgColor
-            searchField.layer.borderWidth = 1
-            searchField.borderStyle = UITextBorderStyle.roundedRect
-        }
-    }
-    @IBOutlet weak var searchButton: UIButton! {
-        didSet {
-            searchButton.layer.cornerRadius = 4
-            searchButton.layer.borderColor = UIColor.lightGray.cgColor
-            searchButton.layer.borderWidth = 1
-        }
-    }
+    @IBOutlet weak var searchTitleLabel: UILabel!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var searchButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,6 +24,37 @@ class MTSearchView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
+    
+    override func awakeFromNib() {
+        styleSearchTitleLabel()
+        styleSearchButton()
+        styleSearchField()
+        styleContent()
+    }
+    
+    func styleSearchTitleLabel() {
+        searchTitleLabel.text = "Search for movie"
+        searchTitleLabel.sizeToFit()
+    }
+    
+    func styleContent() {
+        contentView.backgroundColor = .white
+    }
+    
+    func styleSearchButton() {
+        searchButton.layer.borderColor = UIColor.lightGray.cgColor
+        searchButton.layer.cornerRadius = 4
+        searchButton.layer.borderWidth = 1
+        
+    }
+    
+    func styleSearchField() {
+        searchField.layer.borderColor = UIColor.lightGray.cgColor
+        searchField.borderStyle = UITextBorderStyle.roundedRect
+        searchField.layer.cornerRadius = 4
+        searchField.layer.borderWidth = 1
+    }
+    
     
     // MARK: - Setup
     
@@ -90,7 +96,7 @@ class MTSearchView: UIView {
         element.translatesAutoresizingMaskIntoConstraints = false
         element.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
-
+    
 }
 
 struct SearchViewConstants {
