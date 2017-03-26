@@ -21,6 +21,7 @@ class MTSearchView: UIView {
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     
+    
     weak var delegate: SearchViewDelegate?
     
     override init(frame: CGRect) {
@@ -63,8 +64,10 @@ class MTSearchView: UIView {
     }
     
     func hideIndicator() {
-        indicatorView.isHidden = true
-        activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+            self.indicatorView.isHidden = true
+            self.activityIndicator.stopAnimating()
+        }
     }
     
     func styleSearchField() {
@@ -76,7 +79,7 @@ class MTSearchView: UIView {
     
     func newSearch() {
         activityIndicator.startAnimating()
-        indicatorView.isHidden = false 
+        indicatorView.isHidden = false
         delegate?.searchButtonTappedWithTerm(searchField.text!)
     }
     

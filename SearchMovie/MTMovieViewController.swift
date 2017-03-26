@@ -39,13 +39,8 @@ extension MTMovieViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCell
-        cell.awakeFromNib()
-        
-        if let image = movies[indexPath.row].posterImage {
-            DispatchQueue.main.async {
-                cell.titleLabel.text = self.movies[indexPath.row].title
-                cell.posterImageView.image = image
-            }
+        if movies[indexPath.row].posterImage != nil {
+            cell.configureCell(movies[indexPath.row])
         }
         return cell
     }
@@ -56,12 +51,10 @@ extension MTMovieViewController {
     // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        
         if let selected = selectedIndex {
             let selectedCell = collectionView.cellForItem(at: selected) as! MovieCell
             unhighlight(cell: selectedCell)
         }
-        
         let cell = collectionView.cellForItem(at: indexPath) as! MovieCell
         cell.isSelected = true
         cell.selectedStyle()

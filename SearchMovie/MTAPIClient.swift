@@ -56,7 +56,7 @@ class MTAPIClient {
         let urlRequest = URLRequest(url: url)
         session.dataTask(with: urlRequest) { data, response, error in
             completion(data, response, error)
-        }.resume()
+            }.resume()
     }
     
     static func search(for query: String?, forPage page: String, completion: @escaping (_ response: Response) -> Void) {
@@ -74,7 +74,7 @@ class MTAPIClient {
                 } else {
                     completion(.badJSON(ResponseError.badData))
                 }
-            }.resume()
+                }.resume()
         }
     }
     

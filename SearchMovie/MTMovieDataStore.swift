@@ -15,11 +15,9 @@ final class MTMovieDataStore {
     private var response: Response?
     private var searchTerm: String
     
-    
     init(searchTerm: String) {
         self.searchTerm = searchTerm
     }
-    
     
     func fetchQuery(for movieQuery: String) {
         searchTerm = movieQuery
@@ -56,7 +54,6 @@ final class MTMovieDataStore {
                         }
                     }
                 }
-
             case .badData(let error):
                 print(error.localizedDescription)
                 completion(nil)
@@ -71,6 +68,5 @@ final class MTMovieDataStore {
                 return
             }
         }
-        
     }
 }

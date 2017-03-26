@@ -10,8 +10,9 @@ import UIKit
 
 class MTSearchViewController: UIViewController, SearchViewDelegate {
     
-    fileprivate var dataStore: MTMovieDataStore
+    fileprivate var dataStore: MTMovieDataStore?
     @IBOutlet var searchView: MTSearchView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +45,9 @@ extension MTSearchViewController: UITextFieldDelegate {
     }
     
     func searchButtonTappedWithTerm(_ searchTerm: String) {
+        print(searchTerm)
         dataStore = MTMovieDataStore(searchTerm: searchTerm)
         searchView.searchField.text = nil
-        dataStore.fetchQuery(for: searchTerm)
         let destinationVC = MTMovieViewController(nibName: "MTMovieViewController", bundle: nil)
         getMovies { movies in
             DispatchQueue.main.async {
@@ -55,23 +56,24 @@ extension MTSearchViewController: UITextFieldDelegate {
                 self.searchView.hideIndicator()
                 self.navigationController?.pushViewController(destinationVC, animated: false)
             }
-            
         }
     }
     
     func getMovies(completion: @escaping ([MTMovie]) -> Void) {
-        dataStore.fetchNextPage { pageNumber in
-            self.dataStore.sendCall(pageNumber: pageNumber) { movies in
-                guard movies != nil else {
-                    let delay = DispatchTime.now() + 1
-                    DispatchQueue.main.asyncAfter(deadline: delay) {
-                        self.searchView.hideIndicator()
+        if let store = dataStore {
+            store.fetchNextPage { pageNumber in
+                store.sendCall(pageNumber: pageNumber) { movies in
+                    guard movies != nil else {
+                        let delay = DispatchTime.now() + 1
+                        DispatchQueue.main.asyncAfter(deadline: delay) {
+                            self.searchView.hideIndicator()
+                        }
+                        return }
+                    if let movies = movies {
+                        completion(movies)
                     }
-                    return
                 }
-                if let movies = movies {
-                    completion(movies)
-                }
+                
             }
         }
     }
@@ -85,4 +87,3 @@ extension MTSearchViewController: UITextFieldDelegate {
         view.endEditing(true)
     }
 }
-

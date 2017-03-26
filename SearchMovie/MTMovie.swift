@@ -20,13 +20,14 @@ struct MTMovie: Equatable {
         if let title = json["Title"] as? String,
             let imdbID = json["imdbID"] as? String,
             let year = json["Year"] as? String,
-            let imageURL = json["Poster"] as? String,
+            let imageURLString = json["Poster"] as? String,
+            let imageURL = URL(string: imageURLString),
             let type = json["Type"] as? String,
             type == "movie"{
             self.title = title
             self.year = year
             self.imdbID = imdbID
-            self.posterImageURL = URL(string: imageURL)!
+            self.posterImageURL = imageURL
             self.posterImage = nil
         } else {
             return nil
