@@ -14,24 +14,17 @@ class MTSearchViewController: UIViewController {
     
     fileprivate var dataStore: MTMovieDataStore?
     @IBOutlet var searchView: MTSearchView!
+
+    convenience init(dataStore: MTMovieDataStore) {
+        self.init(nibName: "MTSearchViewController", bundle: nil)
+        self.dataStore = dataStore
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardOnTap()
         searchView.frame = view.frame
-        searchView.delegate = self
-        searchView.searchField.delegate = self
-    }
-    
-    // MARK: - Initialization with MTDataStore
-    
-    init(dataStore: MTMovieDataStore) {
-        super.init(nibName: "MTSearchViewController", bundle: nil)
-        self.dataStore = dataStore
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        setupSearchViewDelegates()
     }
 }
 
@@ -46,6 +39,11 @@ extension MTSearchViewController: UITextFieldDelegate {
 }
 
 extension MTSearchViewController: SearchViewDelegate {
+    
+    func setupSearchViewDelegates() {
+        searchView.searchField.delegate = self
+        searchView.delegate = self
+    }
     
     // MARK: - SearchView Delegate
     
