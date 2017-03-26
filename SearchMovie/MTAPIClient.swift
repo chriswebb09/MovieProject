@@ -39,6 +39,8 @@ enum ResponseError: Error {
 
 class MTAPIClient {
     
+    // Calls downloadData and returns UIImage in completion
+    
     static func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
         MTAPIClient.downloadData(url: url) { data, response, error in
             if error != nil {
@@ -50,6 +52,8 @@ class MTAPIClient {
             }
         }
     }
+    
+    // MARK: - Gets data from networking request
     
     static func downloadData(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         let session = URLSession(configuration: .ephemeral)
@@ -77,6 +81,8 @@ class MTAPIClient {
                 }.resume()
         }
     }
+    
+    // MARK: - Converts response data from network to JSON type
     
     static func convertDataToJSON(_ data: Data?) -> JSON? {
         guard let data = data else { return nil }

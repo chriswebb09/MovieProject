@@ -12,8 +12,12 @@ private let reuseIdentifier = "MovieCell"
 
 class MTMovieViewController: UICollectionViewController {
     
+    // MARK: - Properties
+    
     var movies: [MTMovie]!
     var selectedIndex: IndexPath?
+    
+    // MARK: - Initialization
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +35,6 @@ extension MTMovieViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
@@ -61,6 +64,8 @@ extension MTMovieViewController {
         selectedIndex = indexPath
         return true
     }
+    
+    // MARK: - Removes highlighting style from cell when new cell is selected
     
     func unhighlight(cell: MovieCell) {
         cell.isSelected = false

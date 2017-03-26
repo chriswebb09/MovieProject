@@ -14,6 +14,8 @@ protocol SearchViewDelegate: class {
 
 class MTSearchView: UIView {
     
+    // MARK: - SearchView properties
+    
     @IBOutlet weak var indicatorView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchTitleLabel: UILabel!
@@ -21,8 +23,9 @@ class MTSearchView: UIView {
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     
-    
     weak var delegate: SearchViewDelegate?
+    
+    // MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,6 +37,8 @@ class MTSearchView: UIView {
         commonInit()
     }
     
+    // MARK: - Setup
+    
     override func awakeFromNib() {
         styleSearchTitleLabel()
         styleSearchButton()
@@ -42,32 +47,26 @@ class MTSearchView: UIView {
         styleContent()
     }
     
+    fileprivate func commonInit() {
+        Bundle.main.loadNibNamed("MTSearchView", owner: self, options: nil)
+        addSubview(contentView)
+        layoutSubviews()
+        searchButton.addTarget(self, action: #selector(newSearch), for: .touchUpInside)
+    }
+    
+    // MARK: - Activity indicator setup
+    
     func setupIndicator() {
         activityIndicator.hidesWhenStopped = true
         indicatorView.isHidden = true
         indicatorView.layer.cornerRadius = 10
     }
     
+    // MARK: - UI elements setup
+    
     func styleSearchTitleLabel() {
         searchTitleLabel.text = "Search for movie"
         searchTitleLabel.sizeToFit()
-    }
-    
-    func styleContent() {
-        contentView.backgroundColor = .white
-    }
-    
-    func styleSearchButton() {
-        searchButton.layer.borderColor = UIColor.lightGray.cgColor
-        searchButton.layer.cornerRadius = 4
-        searchButton.layer.borderWidth = 1
-    }
-    
-    func hideIndicator() {
-        DispatchQueue.main.async {
-            self.indicatorView.isHidden = true
-            self.activityIndicator.stopAnimating()
-        }
     }
     
     func styleSearchField() {
@@ -83,13 +82,23 @@ class MTSearchView: UIView {
         delegate?.searchButtonTappedWithTerm(searchField.text!)
     }
     
-    // MARK: - Setup
+    func styleContent() {
+        contentView.backgroundColor = .white
+    }
     
-    fileprivate func commonInit() {
-        Bundle.main.loadNibNamed("MTSearchView", owner: self, options: nil)
-        addSubview(contentView)
-        layoutSubviews()
-        searchButton.addTarget(self, action: #selector(newSearch), for: .touchUpInside)
+    func styleSearchButton() {
+        searchButton.layer.borderColor = UIColor.lightGray.cgColor
+        searchButton.layer.cornerRadius = 4
+        searchButton.layer.borderWidth = 1
+    }
+    
+    // MARK: - Hide activity indicator functionality
+    
+    func hideIndicator() {
+        DispatchQueue.main.async {
+            self.indicatorView.isHidden = true
+            self.activityIndicator.stopAnimating()
+        }
     }
 }
 

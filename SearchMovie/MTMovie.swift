@@ -10,11 +10,15 @@ import UIKit
 
 struct MTMovie: Equatable {
     
+    // MARK: - MTMovie properties
+    
     let title: String
     let year: String
     let imdbID: String
     let posterImageURL: URL
     var posterImage: UIImage?
+    
+    // MARK: - Failable initialization
     
     init?(_ json: [String : Any]) {
         if let title = json["Title"] as? String,
@@ -32,11 +36,6 @@ struct MTMovie: Equatable {
         } else {
             return nil
         }
-    }
-    
-    
-    mutating func setImage(image: UIImage) {
-        self.posterImage = image
     }
     
 }

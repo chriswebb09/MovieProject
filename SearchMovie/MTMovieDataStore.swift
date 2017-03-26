@@ -10,6 +10,8 @@ import UIKit
 
 final class MTMovieDataStore {
     
+    // MARK: - Properties
+    
     private var pageNumber = 0
     private var totalResults: String?
     private var response: Response?
@@ -19,9 +21,7 @@ final class MTMovieDataStore {
         self.searchTerm = searchTerm
     }
     
-    func fetchQuery(for movieQuery: String) {
-        searchTerm = movieQuery
-    }
+    // MARK: - Increments page number and returns it inside completion
     
     func fetchNextPage(completion: @escaping(String) -> Void) {
         pageNumber += 1

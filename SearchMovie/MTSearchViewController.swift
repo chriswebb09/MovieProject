@@ -8,11 +8,12 @@
 
 import UIKit
 
-class MTSearchViewController: UIViewController, SearchViewDelegate {
+class MTSearchViewController: UIViewController {
+    
+    // MARK: - Properties
     
     fileprivate var dataStore: MTMovieDataStore?
     @IBOutlet var searchView: MTSearchView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,13 +23,8 @@ class MTSearchViewController: UIViewController, SearchViewDelegate {
         searchView.searchField.delegate = self
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        self.dataStore = MTMovieDataStore(searchTerm: "")
+    init(dataStore: MTMovieDataStore) {
         super.init(nibName: "MTSearchViewController", bundle: nil)
-    }
-    
-    convenience init(dataStore: MTMovieDataStore) {
-        self.init(nibName: "MTSearchViewController", bundle: nil)
         self.dataStore = dataStore
     }
     
@@ -39,10 +35,18 @@ class MTSearchViewController: UIViewController, SearchViewDelegate {
 
 extension MTSearchViewController: UITextFieldDelegate {
     
+    // MARK: - Textfield delegate method
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
     }
+    
+}
+
+extension MTSearchViewController: SearchViewDelegate {
+    
+    // MARK: - SearchView Delegate
     
     func searchButtonTappedWithTerm(_ searchTerm: String) {
         print(searchTerm)
@@ -59,6 +63,8 @@ extension MTSearchViewController: UITextFieldDelegate {
         }
     }
     
+    // MARK: - Search logic
+    
     func getMovies(completion: @escaping ([MTMovie]) -> Void) {
         if let store = dataStore {
             store.fetchNextPage { pageNumber in
@@ -73,10 +79,15 @@ extension MTSearchViewController: UITextFieldDelegate {
                         completion(movies)
                     }
                 }
-                
             }
         }
     }
+    
+}
+
+extension MTSearchViewController {
+    
+    // MARK: - Keyboard logic
     
     func hideKeyboardOnTap() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
