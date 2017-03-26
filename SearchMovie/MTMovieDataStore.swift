@@ -16,8 +16,8 @@ final class MTMovieDataStore {
     private var searchTerm: String
     
     
-    init(searchQuery: String) {
-        self.searchTerm = searchQuery
+    init(searchTerm: String) {
+        self.searchTerm = searchTerm
     }
     
     
@@ -30,37 +30,43 @@ final class MTMovieDataStore {
         completion(String(pageNumber))
     }
     
-    func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
-        MTAPIClient.downloadData(url: url) { data, response, error in
-            if error != nil {
-                print(error?.localizedDescription ?? "Unable to get specific error")
-                completion(nil)
-            }
-            if let imageData = data {
-                completion(UIImage(data: imageData))
-            }
-        }
-    }
-    
     func sendCall(pageNumber: String, completion: @escaping ([MTMovie]?) -> Void) {
+        var movies = [MTMovie]()
+        var fullMovieData = [MTMovie]()
         MTAPIClient.search(for: searchTerm, forPage: pageNumber) { movieData in
+            
             switch movieData {
             case .success(let json):
                 guard let search = json["Search"] as? [[String : String]] else { return }
-                var movies = [MTMovie]()
+                
                 for movie in 0..<search.count {
-                    if let newMovie = MTMovie(search[movie]) {
-                        movies.append(newMovie)
+                    let movie = MTMovie(search[movie])
+                    if let movieFrame = movie {
+                        movies.append(movieFrame)
                     }
                 }
-                completion(movies)
+                
+                movies.forEach { movie in
+                    var newMovie = movie
+                    MTAPIClient.downloadImage(url: newMovie.posterImageURL) { image in
+                        newMovie.posterImage = image
+                        fullMovieData.append(newMovie)
+                        if fullMovieData.count == movies.count {
+                            completion(fullMovieData)
+                        }
+                    }
+                }
+
             case .badData(let error):
                 print(error.localizedDescription)
+                completion(nil)
                 return
             case .badJSON(let error):
                 print(error.localizedDescription)
+                completion(nil)
                 return
             case .badURL(let error):
+                completion(nil)
                 print(error.localizedDescription)
                 return
             }

@@ -15,8 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let store = MTMovieDataStore(searchQuery: "")
-        window?.rootViewController = MTSearchViewController(dataStore: store)
+        let dataStore = MTMovieDataStore(searchTerm: "")
+        let rootVC = MTSearchViewController(dataStore: dataStore)
+        window?.rootViewController = UINavigationController(rootViewController: rootVC)
         window?.makeKeyAndVisible()
         return true
     }

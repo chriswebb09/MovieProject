@@ -6,20 +6,50 @@
 //  Copyright © 2017 Christopher Webb-Orenstein. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 typealias JSON = [String : Any]
 
 enum Response {
     case success(JSON), badURL(Error), badData(Error), badJSON(Error)
+    
+    var description: String {
+        switch self {
+        case .success(let json):
+            print(json)
+            return "Success"
+        default:
+            return "ERROR"
+        }
+    }
 }
 
 enum ResponseError: Error {
-    case badURL
-    case badData
+    case badURL, badData, badJSON
+    
+    var localizedDescription: String {
+        switch self {
+        case .badData:
+            return "Bad data"
+        default:
+            return "ERROR"
+        }
+    }
 }
 
 class MTAPIClient {
+    
+    static func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
+        MTAPIClient.downloadData(url: url) { data, response, error in
+            if error != nil {
+                print(error?.localizedDescription ?? "Unable to get specific error")
+                completion(nil)
+            }
+            if let imageData = data {
+                completion(UIImage(data: imageData))
+            }
+        }
+    }
     
     static func downloadData(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         let session = URLSession(configuration: .ephemeral)

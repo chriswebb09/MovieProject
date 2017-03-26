@@ -6,14 +6,15 @@
 //  Copyright © 2017 Christopher Webb-Orenstein. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-struct MTMovie {
+struct MTMovie: Equatable {
     
     let title: String
     let year: String
     let imdbID: String
-    let imageURL: URL
+    let posterImageURL: URL
+    var posterImage: UIImage?
     
     init?(_ json: [String : Any]) {
         if let title = json["Title"] as? String,
@@ -25,10 +26,27 @@ struct MTMovie {
             self.title = title
             self.year = year
             self.imdbID = imdbID
-            self.imageURL = URL(string: imageURL)!
+            self.posterImageURL = URL(string: imageURL)!
+            self.posterImage = nil
         } else {
             return nil
         }
     }
     
+    
+    mutating func setImage(image: UIImage) {
+        self.posterImage = image
+    }
+    
+}
+
+extension MTMovie: Hashable {
+
+    public var hashValue: Int {
+        return imdbID.hash
+    }
+
+    public static func ==(lhs: MTMovie, rhs: MTMovie) -> Bool {
+        return lhs.imdbID == rhs.imdbID
+    }
 }

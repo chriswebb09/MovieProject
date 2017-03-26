@@ -8,19 +8,21 @@
 
 import UIKit
 
-class MTSearchViewController: UIViewController {
+class MTSearchViewController: UIViewController, SearchViewDelegate {
     
     fileprivate var dataStore: MTMovieDataStore
     @IBOutlet var searchView: MTSearchView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardOnTap()
         searchView.frame = view.frame
-        searchView.searchButton.addTarget(self, action: #selector(onSearch), for: .touchUpInside)
+        searchView.delegate = self
+        searchView.searchField.delegate = self
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        self.dataStore = MTMovieDataStore(searchQuery: "")
+        self.dataStore = MTMovieDataStore(searchTerm: "")
         super.init(nibName: "MTSearchViewController", bundle: nil)
     }
     
@@ -32,27 +34,50 @@ class MTSearchViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension MTSearchViewController: UITextFieldDelegate {
     
-    func onSearch() {
-        guard let searchTerm = searchView.searchField.text else { return }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
+    
+    func searchButtonTappedWithTerm(_ searchTerm: String) {
+        dataStore = MTMovieDataStore(searchTerm: searchTerm)
         searchView.searchField.text = nil
         dataStore.fetchQuery(for: searchTerm)
-        dataStore.fetchNextPage { [weak self] pageNumber in
-            self?.dataStore.sendCall(pageNumber: pageNumber) { movies in
-                guard let movieCollection = movies else { return }
-                for movie in movieCollection {
-                    self?.dataStore.downloadImage(url: movie.imageURL) { posterImage in
-                        dump(posterImage)
+        let destinationVC = MTMovieViewController(nibName: "MTMovieViewController", bundle: nil)
+        getMovies { movies in
+            DispatchQueue.main.async {
+                let newMovies = movies
+                destinationVC.movies = newMovies
+                self.searchView.hideIndicator()
+                self.navigationController?.pushViewController(destinationVC, animated: false)
+            }
+            
+        }
+    }
+    
+    func getMovies(completion: @escaping ([MTMovie]) -> Void) {
+        dataStore.fetchNextPage { pageNumber in
+            self.dataStore.sendCall(pageNumber: pageNumber) { movies in
+                guard movies != nil else {
+                    let delay = DispatchTime.now() + 1
+                    DispatchQueue.main.asyncAfter(deadline: delay) {
+                        self.searchView.hideIndicator()
                     }
+                    return
+                }
+                if let movies = movies {
+                    completion(movies)
                 }
             }
         }
-       
     }
     
     func hideKeyboardOnTap() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
-                                                                 action: #selector(dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     

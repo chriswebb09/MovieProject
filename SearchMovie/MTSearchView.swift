@@ -8,12 +8,20 @@
 
 import UIKit
 
+protocol SearchViewDelegate: class {
+    func searchButtonTappedWithTerm(_ searchTerm: String)
+}
+
 class MTSearchView: UIView {
     
+    @IBOutlet weak var indicatorView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchTitleLabel: UILabel!
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
+    
+    weak var delegate: SearchViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +37,14 @@ class MTSearchView: UIView {
         styleSearchTitleLabel()
         styleSearchButton()
         styleSearchField()
+        setupIndicator()
         styleContent()
+    }
+    
+    func setupIndicator() {
+        activityIndicator.hidesWhenStopped = true
+        indicatorView.isHidden = true
+        indicatorView.layer.cornerRadius = 10
     }
     
     func styleSearchTitleLabel() {
@@ -45,7 +60,11 @@ class MTSearchView: UIView {
         searchButton.layer.borderColor = UIColor.lightGray.cgColor
         searchButton.layer.cornerRadius = 4
         searchButton.layer.borderWidth = 1
-        
+    }
+    
+    func hideIndicator() {
+        indicatorView.isHidden = true
+        activityIndicator.stopAnimating()
     }
     
     func styleSearchField() {
@@ -55,6 +74,11 @@ class MTSearchView: UIView {
         searchField.layer.borderWidth = 1
     }
     
+    func newSearch() {
+        activityIndicator.startAnimating()
+        indicatorView.isHidden = false 
+        delegate?.searchButtonTappedWithTerm(searchField.text!)
+    }
     
     // MARK: - Setup
     
@@ -62,6 +86,7 @@ class MTSearchView: UIView {
         Bundle.main.loadNibNamed("MTSearchView", owner: self, options: nil)
         addSubview(contentView)
         layoutSubviews()
+        searchButton.addTarget(self, action: #selector(newSearch), for: .touchUpInside)
     }
 }
 
