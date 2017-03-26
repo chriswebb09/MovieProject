@@ -23,6 +23,8 @@ class MTSearchViewController: UIViewController {
         searchView.searchField.delegate = self
     }
     
+    // MARK: - Initialization with MTDataStore
+    
     init(dataStore: MTMovieDataStore) {
         super.init(nibName: "MTSearchViewController", bundle: nil)
         self.dataStore = dataStore
@@ -41,7 +43,6 @@ extension MTSearchViewController: UITextFieldDelegate {
         view.endEditing(true)
         return true
     }
-    
 }
 
 extension MTSearchViewController: SearchViewDelegate {
@@ -82,7 +83,6 @@ extension MTSearchViewController: SearchViewDelegate {
             }
         }
     }
-    
 }
 
 extension MTSearchViewController {

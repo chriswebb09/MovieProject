@@ -76,12 +76,6 @@ class MTSearchView: UIView {
         searchField.layer.borderWidth = 1
     }
     
-    func newSearch() {
-        activityIndicator.startAnimating()
-        indicatorView.isHidden = false
-        delegate?.searchButtonTappedWithTerm(searchField.text!)
-    }
-    
     func styleContent() {
         contentView.backgroundColor = .white
     }
@@ -99,6 +93,14 @@ class MTSearchView: UIView {
             self.indicatorView.isHidden = true
             self.activityIndicator.stopAnimating()
         }
+    }
+    
+    // MARK: - Search button selector method
+    
+    func newSearch() {
+        activityIndicator.startAnimating()
+        indicatorView.isHidden = false
+        delegate?.searchButtonTappedWithTerm(searchField.text!)
     }
 }
 
