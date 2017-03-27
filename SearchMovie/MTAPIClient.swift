@@ -25,11 +25,11 @@ class MTAPIClient {
             }
             if let imageData = data {
                 DispatchQueue.main.async {
-                    let downloadedImage = UIImage(data: imageData)
-                    if let downloadedImage = downloadedImage {
+                    if let downloadedImage = UIImage(data: imageData) {
                         imageCache.setObject(downloadedImage, forKey: url.absoluteString as NSString)
+                        completion(UIImage(data: imageData))
                     }
-                    completion(UIImage(data: imageData))
+                    
                 }
             }
         }
@@ -54,9 +54,8 @@ class MTAPIClient {
                 if error != nil {
                     completion(nil, error)
                 }
-                let json = convertDataToJSON(data)
-                if let returnJSON = json {
-                    completion(returnJSON, nil)
+                if let json = convertDataToJSON(data) {
+                    completion(json, nil)
                 }
             }
         }
