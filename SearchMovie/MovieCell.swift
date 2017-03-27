@@ -8,16 +8,12 @@
 
 import UIKit
 
-class MovieCell: UICollectionViewCell {
-    
-    // MARK: - Properties
+final class MovieCell: UICollectionViewCell {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-    
-    // MARK: - Setup
     
     func setup(hidden: Bool) {
         titleLabel.isHidden = hidden
@@ -35,8 +31,6 @@ class MovieCell: UICollectionViewCell {
         setup(hidden: false)
         activityIndicator.stopAnimating()
     }
-    
-    // MARK: - Sets cell selection style
     
     func setStyle(selected: Bool) {
         posterImageView.isHidden = selected

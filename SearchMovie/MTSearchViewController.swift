@@ -8,17 +8,10 @@
 
 import UIKit
 
-class MTSearchViewController: UIViewController {
-    
-    // MARK: - Properties
+final class MTSearchViewController: UIViewController {
     
     fileprivate var dataStore: MTMovieDataStore?
     @IBOutlet var searchView: MTSearchView!
-    
-    convenience init(dataStore: MTMovieDataStore) {
-        self.init(nibName: "MTSearchViewController", bundle: nil)
-        self.dataStore = dataStore
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +22,6 @@ class MTSearchViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
         title = "Movie Tumble"
     }
-    
-    // MARK: - Search logic
     
     func getMovies(completion: @escaping ([MTMovie]) -> Void) {
         if let store = dataStore {
@@ -50,8 +41,6 @@ class MTSearchViewController: UIViewController {
         }
     }
     
-    // MARK: - Keyboard logic
-    
     func hideKeyboardOnTap() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -62,9 +51,9 @@ class MTSearchViewController: UIViewController {
     }
 }
 
+// MARK: - Textfield delegate
+
 extension MTSearchViewController: UITextFieldDelegate {
-    
-    // MARK: - Textfield delegate method
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
@@ -72,14 +61,14 @@ extension MTSearchViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - SearchView Delegate
+
 extension MTSearchViewController: SearchViewDelegate {
     
     func setupSearchViewDelegates() {
         searchView.searchField.delegate = self
         searchView.delegate = self
     }
-    
-    // MARK: - SearchView Delegate
     
     func searchButtonTappedWithTerm(with searchTerm: String) {
         print(searchTerm)

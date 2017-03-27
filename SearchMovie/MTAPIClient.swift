@@ -13,8 +13,6 @@ let imageCache = NSCache<NSString, UIImage>()
 
 class MTAPIClient {
     
-    // Calls downloadData and returns UIImage in completion
-    
     static func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
         print(url)
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
@@ -33,17 +31,18 @@ class MTAPIClient {
                     }
                     completion(UIImage(data: imageData))
                 }
-                
             }
         }
     }
-    
-    // MARK: - Gets data from networking request
     
     static func downloadData(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         let session = URLSession(configuration: .ephemeral)
         let urlRequest = URLRequest(url: url)
         session.dataTask(with: urlRequest) { data, response, error in
+            print("Data: \(data)")
+            print("Response: \(response)")
+            print("Error: \(error?.localizedDescription)")
+            print("URL: \(url.absoluteString)")
             completion(data, response, error)
             }.resume()
     }
@@ -62,8 +61,6 @@ class MTAPIClient {
             }
         }
     }
-    
-    // MARK: - Converts response data from network to JSON type
     
     static func convertDataToJSON(_ data: Data?) -> JSON? {
         guard let data = data else { return nil }

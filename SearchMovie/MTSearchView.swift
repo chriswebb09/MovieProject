@@ -12,9 +12,7 @@ protocol SearchViewDelegate: class {
     func searchButtonTappedWithTerm(with searchTerm: String)
 }
 
-class MTSearchView: UIView {
-    
-    // MARK: - SearchView properties
+final class MTSearchView: UIView {
     
     @IBOutlet weak var indicatorView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -24,8 +22,6 @@ class MTSearchView: UIView {
     @IBOutlet weak var searchButton: UIButton!
     
     weak var delegate: SearchViewDelegate?
-    
-    // MARK: - Setup
     
     override func awakeFromNib() {
         Bundle.main.loadNibNamed("MTSearchView", owner: self, options: nil)
@@ -38,15 +34,11 @@ class MTSearchView: UIView {
         styleSearchTitleLabel()
     }
     
-    // MARK: - Activity indicator setup
-    
     func setupIndicator() {
         activityIndicator.hidesWhenStopped = true
         indicatorView.isHidden = true
         indicatorView.layer.cornerRadius = 10
     }
-    
-    // MARK: - UI elements setup
     
     func styleSearchTitleLabel() {
         searchTitleLabel.text = "Search for movie"
@@ -70,8 +62,6 @@ class MTSearchView: UIView {
         searchButton.layer.borderWidth = 1
     }
     
-    // MARK: - Hide activity indicator functionality
-    
     func hideIndicator() {
         DispatchQueue.main.async {
             self.indicatorView.isHidden = true
@@ -79,13 +69,11 @@ class MTSearchView: UIView {
         }
     }
     
-    // MARK: - Search button selector method
-    
     func newSearch() {
         activityIndicator.startAnimating()
         indicatorView.isHidden = false
         if let searchText = searchField.text {
-             delegate?.searchButtonTappedWithTerm(with: searchText)
+            delegate?.searchButtonTappedWithTerm(with: searchText)
         }
     }
 }

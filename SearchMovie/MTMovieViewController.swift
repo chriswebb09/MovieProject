@@ -10,14 +10,10 @@ import UIKit
 
 private let reuseIdentifier = "MovieCell"
 
-class MTMovieViewController: UICollectionViewController {
-    
-    // MARK: - Properties
+final class MTMovieViewController: UICollectionViewController {
     
     var movies: [MTMovie]!
     var selectedIndex: IndexPath?
-    
-    // MARK: - Initialization
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +25,6 @@ class MTMovieViewController: UICollectionViewController {
         collectionView?.register(nib, forCellWithReuseIdentifier: "MovieCell")
         navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
     }
-}
-
-extension MTMovieViewController {
     
     // MARK: UICollectionViewDataSource
     
@@ -49,18 +42,15 @@ extension MTMovieViewController {
         cell.activityIndicator.startAnimating()
         MTAPIClient.downloadImage(url: movies[indexPath.row].posterImageURL) { image in
             if let posterImage = image {
-               DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     cell.configureCell(title: self.movies[indexPath.row].title, poster: posterImage)
                 }
             }
         }
         return cell
     }
-}
-
-extension MTMovieViewController {
     
-    // MARK: UICollectionViewDelegate - sets selection style
+    // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         if let selected = selectedIndex {
