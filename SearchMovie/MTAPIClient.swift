@@ -9,46 +9,31 @@
 import UIKit
 
 typealias JSON = [String : Any]
-
-enum Response {
-    case success(JSON), badURL(Error), badData(Error), badJSON(Error)
-    
-    var description: String {
-        switch self {
-        case .success(let json):
-            print(json)
-            return "Success"
-        default:
-            return "ERROR"
-        }
-    }
-}
-
-enum ResponseError: Error {
-    case badURL, badData, badJSON
-    
-    var localizedDescription: String {
-        switch self {
-        case .badData:
-            return "Bad data"
-        default:
-            return "ERROR"
-        }
-    }
-}
+let imageCache = NSCache<NSString, UIImage>()
 
 class MTAPIClient {
     
     // Calls downloadData and returns UIImage in completion
     
     static func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
+        print(url)
+        if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
+            completion(cachedImage)
+        }
         MTAPIClient.downloadData(url: url) { data, response, error in
             if error != nil {
                 print(error?.localizedDescription ?? "Unable to get specific error")
                 completion(nil)
             }
             if let imageData = data {
-                completion(UIImage(data: imageData))
+                DispatchQueue.main.async {
+                    let downloadedImage = UIImage(data: imageData)
+                    if let downloadedImage = downloadedImage {
+                        imageCache.setObject(downloadedImage, forKey: url.absoluteString as NSString)
+                    }
+                    completion(UIImage(data: imageData))
+                }
+                
             }
         }
     }
@@ -63,22 +48,18 @@ class MTAPIClient {
             }.resume()
     }
     
-    static func search(for query: String?, forPage page: String, completion: @escaping (_ response: Response) -> Void) {
-        let session = URLSession(configuration: .ephemeral)
+    static func search(for query: String?, page: String, completion: @escaping (_ responseObject: [String : Any]?, _ error: Error?) -> Void) {
         if let encodedQuery = query?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             let url = URL(string:"http://www.omdbapi.com/?s=\(encodedQuery)&page=\(page)") {
-            let request = URLRequest(url: url)
-            session.dataTask(with: request) { data, response, error in
+            MTAPIClient.downloadData(url: url) { data, response, error in
                 if error != nil {
-                    completion(.badData(ResponseError.badData))
+                    completion(nil, error)
                 }
                 let json = convertDataToJSON(data)
                 if let returnJSON = json {
-                    completion(.success(returnJSON))
-                } else {
-                    completion(.badJSON(ResponseError.badData))
+                    completion(returnJSON, nil)
                 }
-                }.resume()
+            }
         }
     }
     

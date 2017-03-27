@@ -16,7 +16,7 @@ struct MTMovie: Equatable {
     let year: String
     let imdbID: String
     let posterImageURL: URL
-    var posterImage: UIImage?
+   // var posterImage: UIImage?
     
     // MARK: - Failable initialization
     
@@ -32,12 +32,10 @@ struct MTMovie: Equatable {
             self.year = year
             self.imdbID = imdbID
             self.posterImageURL = imageURL
-            self.posterImage = nil
         } else {
             return nil
         }
     }
-    
 }
 
 extension MTMovie: Hashable {

@@ -12,24 +12,34 @@ class MovieCell: UICollectionViewCell {
     
     // MARK: - Properties
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
     // MARK: - Setup
     
-    func configureCell(_ movie: MTMovie) {
-        DispatchQueue.main.async {
-            self.posterImageView.image = movie.posterImage
-            self.titleLabel.text = movie.title
-        }
+    func setup(hidden: Bool) {
+        titleLabel.isHidden = hidden
+        titleView.isHidden = hidden
+        posterImageView.isHidden = hidden
+        activityIndicator.hidesWhenStopped = true
+    }
+    
+    func configureCell(title: String, poster: UIImage) {
+        posterImageView.image = poster
+        titleLabel.text = title
+        layer.borderColor = UIColor.white.cgColor
+        layer.borderWidth = 2
+        layer.cornerRadius = 4
+        setup(hidden: false)
+        activityIndicator.stopAnimating()
     }
     
     // MARK: - Sets cell selection style
     
-    func selectedStyle() {
-        posterImageView.isHidden = isSelected
-        titleLabel.backgroundColor = .white
-        backgroundColor = isSelected ? .red : .gray
+    func setStyle(selected: Bool) {
+        posterImageView.isHidden = selected
+        backgroundColor = selected ? .red : .gray
     }
 }

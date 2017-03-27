@@ -14,10 +14,9 @@ final class MTMovieDataStore {
     
     private var pageNumber = 0
     private var totalResults: String?
-    private var response: Response?
     private var searchTerm: String
     
-    // MARK: - Initializes with movie search term 
+    // MARK: - Initializes with movie search term
     
     init(searchTerm: String) {
         self.searchTerm = searchTerm
@@ -35,49 +34,20 @@ final class MTMovieDataStore {
         // MARK: - sendCall method properties
         
         var movies = [MTMovie]()
-        var fullMovieData = [MTMovie]()
         
-        MTAPIClient.search(for: searchTerm, forPage: pageNumber) { movieData in
-            switch movieData {
-                
-                // MARK: - Converts JSON data to movie data types
-                
-            case .success(let json):
-                guard let search = json["Search"] as? [[String : String]] else { return }
+        MTAPIClient.search(for: searchTerm, page: pageNumber) { movieData, error in
+            
+            // MARK: - Converts JSON data to movie data types
+            
+            if let data = movieData {
+                guard let search = data["Search"] as? [[String : String]] else { return }
                 for movie in 0..<search.count {
                     let movie = MTMovie(search[movie])
-                    if let movieFrame = movie {
-                        movies.append(movieFrame)
+                    if let movie = movie {
+                        movies.append(movie)
                     }
                 }
-                
-                // MARK: - Takes movie data types and iterates through them to add image
-                
-                movies.forEach { movie in
-                    var newMovie = movie
-                    MTAPIClient.downloadImage(url: newMovie.posterImageURL) { image in
-                        newMovie.posterImage = image
-                        fullMovieData.append(newMovie)
-                        if fullMovieData.count == movies.count {
-                            completion(fullMovieData)
-                        }
-                    }
-                }
-                
-                // MARK: - Failed network request logic
-                
-            case .badData(let error):
-                print(error.localizedDescription)
-                completion(nil)
-                return
-            case .badJSON(let error):
-                print(error.localizedDescription)
-                completion(nil)
-                return
-            case .badURL(let error):
-                completion(nil)
-                print(error.localizedDescription)
-                return
+                completion(movies)
             }
         }
     }

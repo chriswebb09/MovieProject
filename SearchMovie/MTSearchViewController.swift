@@ -14,7 +14,7 @@ class MTSearchViewController: UIViewController {
     
     fileprivate var dataStore: MTMovieDataStore?
     @IBOutlet var searchView: MTSearchView!
-
+    
     convenience init(dataStore: MTMovieDataStore) {
         self.init(nibName: "MTSearchViewController", bundle: nil)
         self.dataStore = dataStore
@@ -25,6 +25,40 @@ class MTSearchViewController: UIViewController {
         hideKeyboardOnTap()
         searchView.frame = view.frame
         setupSearchViewDelegates()
+        var font = UIFont(name: "Helvetica", size: 18)
+        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
+        title = "Movie Tumble"
+    }
+    
+    // MARK: - Search logic
+    
+    func getMovies(completion: @escaping ([MTMovie]) -> Void) {
+        if let store = dataStore {
+            store.fetchNextPage { pageNumber in
+                store.sendCall(pageNumber: pageNumber) { movies in
+                    guard movies != nil else {
+                        let delay = DispatchTime.now() + 1
+                        DispatchQueue.main.asyncAfter(deadline: delay) {
+                            self.searchView.hideIndicator() }
+                        return
+                    }
+                    if let movies = movies {
+                        completion(movies)
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK: - Keyboard logic
+    
+    func hideKeyboardOnTap() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
@@ -47,52 +81,18 @@ extension MTSearchViewController: SearchViewDelegate {
     
     // MARK: - SearchView Delegate
     
-    func searchButtonTappedWithTerm(_ searchTerm: String) {
+    func searchButtonTappedWithTerm(with searchTerm: String) {
         print(searchTerm)
         dataStore = MTMovieDataStore(searchTerm: searchTerm)
         searchView.searchField.text = nil
         let destinationVC = MTMovieViewController(nibName: "MTMovieViewController", bundle: nil)
         getMovies { movies in
             DispatchQueue.main.async {
-                let newMovies = movies
-                destinationVC.movies = newMovies
+                destinationVC.movies = movies
+                destinationVC.title = "Search term: \(searchTerm)"
                 self.searchView.hideIndicator()
                 self.navigationController?.pushViewController(destinationVC, animated: false)
             }
         }
-    }
-    
-    // MARK: - Search logic
-    
-    func getMovies(completion: @escaping ([MTMovie]) -> Void) {
-        if let store = dataStore {
-            store.fetchNextPage { pageNumber in
-                store.sendCall(pageNumber: pageNumber) { movies in
-                    guard movies != nil else {
-                        let delay = DispatchTime.now() + 1
-                        DispatchQueue.main.asyncAfter(deadline: delay) {
-                            self.searchView.hideIndicator()
-                        }
-                        return }
-                    if let movies = movies {
-                        completion(movies)
-                    }
-                }
-            }
-        }
-    }
-}
-
-extension MTSearchViewController {
-    
-    // MARK: - Keyboard logic
-    
-    func hideKeyboardOnTap() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
     }
 }

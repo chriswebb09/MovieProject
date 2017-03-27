@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SearchViewDelegate: class {
-    func searchButtonTappedWithTerm(_ searchTerm: String)
+    func searchButtonTappedWithTerm(with searchTerm: String)
 }
 
 class MTSearchView: UIView {
@@ -25,33 +25,17 @@ class MTSearchView: UIView {
     
     weak var delegate: SearchViewDelegate?
     
-    // MARK: - Initialization
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
     // MARK: - Setup
     
     override func awakeFromNib() {
-        styleSearchTitleLabel()
-        styleSearchButton()
-        styleSearchField()
-        setupIndicator()
-        styleContent()
-    }
-    
-    fileprivate func commonInit() {
         Bundle.main.loadNibNamed("MTSearchView", owner: self, options: nil)
         addSubview(contentView)
         layoutSubviews()
-        searchButton.addTarget(self, action: #selector(newSearch), for: .touchUpInside)
+        styleContent()
+        setupIndicator()
+        styleSearchField()
+        setupSearchButton()
+        styleSearchTitleLabel()
     }
     
     // MARK: - Activity indicator setup
@@ -66,7 +50,6 @@ class MTSearchView: UIView {
     
     func styleSearchTitleLabel() {
         searchTitleLabel.text = "Search for movie"
-        searchTitleLabel.sizeToFit()
     }
     
     func styleSearchField() {
@@ -80,7 +63,8 @@ class MTSearchView: UIView {
         contentView.backgroundColor = .white
     }
     
-    func styleSearchButton() {
+    func setupSearchButton() {
+        searchButton.addTarget(self, action: #selector(newSearch), for: .touchUpInside)
         searchButton.layer.borderColor = UIColor.lightGray.cgColor
         searchButton.layer.cornerRadius = 4
         searchButton.layer.borderWidth = 1
@@ -100,7 +84,9 @@ class MTSearchView: UIView {
     func newSearch() {
         activityIndicator.startAnimating()
         indicatorView.isHidden = false
-        delegate?.searchButtonTappedWithTerm(searchField.text!)
+        if let searchText = searchField.text {
+             delegate?.searchButtonTappedWithTerm(with: searchText)
+        }
     }
 }
 

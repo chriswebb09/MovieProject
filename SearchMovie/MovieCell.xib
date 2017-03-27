@@ -19,13 +19,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R2w-xg-tcm">
-                        <rect key="frame" x="0.0" y="0.0" width="186" height="229"/>
+                        <rect key="frame" x="0.0" y="0.0" width="186" height="230"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBI-0s-2Tz">
-                        <rect key="frame" x="0.0" y="219" width="186" height="46"/>
+                        <rect key="frame" x="0.0" y="211" width="186" height="54"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deB-L0-Wga">
-                                <rect key="frame" x="0.0" y="0.0" width="186" height="46"/>
+                                <rect key="frame" x="0.0" y="-1" width="186" height="56"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -36,9 +36,13 @@
                             <constraint firstItem="deB-L0-Wga" firstAttribute="centerY" secondItem="uBI-0s-2Tz" secondAttribute="centerY" id="0Kq-t9-cK7"/>
                             <constraint firstItem="deB-L0-Wga" firstAttribute="centerX" secondItem="uBI-0s-2Tz" secondAttribute="centerX" id="ENz-08-a0s"/>
                             <constraint firstItem="deB-L0-Wga" firstAttribute="leading" secondItem="uBI-0s-2Tz" secondAttribute="leading" id="Fzp-ow-B0H"/>
-                            <constraint firstItem="deB-L0-Wga" firstAttribute="top" secondItem="uBI-0s-2Tz" secondAttribute="top" id="zWN-8e-Nxw"/>
+                            <constraint firstItem="deB-L0-Wga" firstAttribute="top" secondItem="uBI-0s-2Tz" secondAttribute="top" constant="-1" id="zWN-8e-Nxw"/>
                         </constraints>
                     </view>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5B7-tY-vYQ">
+                        <rect key="frame" x="75" y="114" width="37" height="37"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </activityIndicatorView>
                 </subviews>
             </view>
             <constraints>
@@ -46,13 +50,14 @@
                 <constraint firstAttribute="bottom" secondItem="uBI-0s-2Tz" secondAttribute="bottom" id="2i9-SJ-lo4"/>
                 <constraint firstItem="uBI-0s-2Tz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4hM-1F-U03"/>
                 <constraint firstItem="R2w-xg-tcm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="GV3-f5-gY3"/>
-                <constraint firstItem="uBI-0s-2Tz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="219" id="Gae-3U-nQI"/>
+                <constraint firstItem="uBI-0s-2Tz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="211" id="Gae-3U-nQI"/>
                 <constraint firstItem="R2w-xg-tcm" firstAttribute="centerX" secondItem="uBI-0s-2Tz" secondAttribute="centerX" id="HcW-Y5-KTB"/>
-                <constraint firstAttribute="bottom" secondItem="R2w-xg-tcm" secondAttribute="bottom" constant="36" id="P4M-Vu-Qaa"/>
+                <constraint firstAttribute="bottom" secondItem="R2w-xg-tcm" secondAttribute="bottom" constant="35" id="P4M-Vu-Qaa"/>
                 <constraint firstAttribute="trailing" secondItem="R2w-xg-tcm" secondAttribute="trailing" id="PcE-Q8-E1n"/>
             </constraints>
             <size key="customSize" width="186" height="265"/>
             <connections>
+                <outlet property="activityIndicator" destination="5B7-tY-vYQ" id="fZh-R5-KV6"/>
                 <outlet property="posterImageView" destination="R2w-xg-tcm" id="g5L-fm-WSf"/>
                 <outlet property="titleLabel" destination="deB-L0-Wga" id="bYR-Xu-9yi"/>
                 <outlet property="titleView" destination="uBI-0s-2Tz" id="wfM-pr-EFm"/>

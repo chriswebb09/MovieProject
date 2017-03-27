@@ -24,7 +24,10 @@ class MTMovieViewController: UICollectionViewController {
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.allowsMultipleSelection = true
-        collectionView?.register(UINib(nibName: "MovieCell", bundle: nil), forCellWithReuseIdentifier: "MovieCell")
+        let nib = UINib(nibName: "MovieCell", bundle: nil)
+        let font = UIFont(name: "Helvetica", size: 18)
+        collectionView?.register(nib, forCellWithReuseIdentifier: "MovieCell")
+        navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: font]
     }
 }
 
@@ -42,8 +45,14 @@ extension MTMovieViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCell
-        if movies[indexPath.row].posterImage != nil {
-            cell.configureCell(movies[indexPath.row])
+        cell.setup(hidden: true)
+        cell.activityIndicator.startAnimating()
+        MTAPIClient.downloadImage(url: movies[indexPath.row].posterImageURL) { image in
+            if let posterImage = image {
+               DispatchQueue.main.async {
+                    cell.configureCell(title: self.movies[indexPath.row].title, poster: posterImage)
+                }
+            }
         }
         return cell
     }
@@ -51,24 +60,21 @@ extension MTMovieViewController {
 
 extension MTMovieViewController {
     
-    // MARK: UICollectionViewDelegate
+    // MARK: UICollectionViewDelegate - sets selection style
     
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         if let selected = selectedIndex {
-            let selectedCell = collectionView.cellForItem(at: selected) as! MovieCell
-            unhighlight(cell: selectedCell)
+            if let selectedCell = collectionView.cellForItem(at: selected) as? MovieCell {
+                selectedCell.isSelected = !selectedCell.isSelected
+                selectedCell.setStyle(selected: selectedCell.isSelected)
+                selectedIndex = nil
+            }
         }
-        let cell = collectionView.cellForItem(at: indexPath) as! MovieCell
-        cell.isSelected = true
-        cell.selectedStyle()
-        selectedIndex = indexPath
+        if let cell = collectionView.cellForItem(at: indexPath) as? MovieCell {
+            selectedIndex = indexPath
+            cell.isSelected = true
+            cell.setStyle(selected: cell.isSelected)
+        }
         return true
-    }
-    
-    // MARK: - Removes highlighting style from cell when new cell is selected
-    
-    func unhighlight(cell: MovieCell) {
-        cell.isSelected = false
-        cell.selectedStyle()
     }
 }

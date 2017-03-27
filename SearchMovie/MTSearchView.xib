@@ -25,9 +25,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iH8-8l-UYD">
-                    <rect key="frame" x="37.5" y="303.5" width="300" height="60"/>
+                    <rect key="frame" x="12.5" y="303.5" width="350" height="60"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="300" id="Oxi-C2-RNO"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="350" id="bwa-YT-UEA"/>
                         <constraint firstAttribute="height" constant="60" id="yPY-cP-iMj"/>
                     </constraints>
                     <nil key="textColor"/>
@@ -35,12 +35,15 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mb-cK-Yin">
-                    <rect key="frame" x="127" y="464.5" width="120" height="60"/>
+                    <rect key="frame" x="112" y="464.5" width="150" height="60"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="120" id="B3N-iX-fuw"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="cZQ-c7-scs"/>
                         <constraint firstAttribute="height" constant="60" id="lDu-iD-ZO6"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
                 </button>
                 <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r0M-lM-a4z">
                     <rect key="frame" x="143" y="289.5" width="88" height="88"/>
