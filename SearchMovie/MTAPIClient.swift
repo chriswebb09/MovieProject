@@ -22,12 +22,14 @@ class MTAPIClient {
             if error != nil {
                 print(error?.localizedDescription ?? "Unable to get specific error")
                 completion(nil)
+                return
             }
             if let imageData = data {
                 DispatchQueue.main.async {
                     if let downloadedImage = UIImage(data: imageData) {
                         imageCache.setObject(downloadedImage, forKey: url.absoluteString as NSString)
                         completion(downloadedImage)
+                        return
                     }
                 }
             }
@@ -52,9 +54,11 @@ class MTAPIClient {
             MTAPIClient.downloadData(url: url) { data, response, error in
                 if error != nil {
                     completion(nil, error)
+                    return
                 }
                 if let json = convertDataToJSON(data) {
                     completion(json, nil)
+                    return
                 }
             }
         }
