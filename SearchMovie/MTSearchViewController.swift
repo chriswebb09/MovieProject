@@ -23,21 +23,26 @@ final class MTSearchViewController: UIViewController {
         title = "Movie Tumble"
     }
     
-    func getMovies(completion: @escaping ([MTMovie]) -> Void) {
+    func getMovies(completion: @escaping ([MTMovie], String) -> Void) {
         if let store = dataStore {
-            store.fetchNextPage { pageNumber in
+            store.fetchNextPage(number: 0) { pageNumber in
                 store.sendCall(pageNumber: pageNumber) { movies in
                     guard movies != nil else {
                         let delay = DispatchTime.now() + 1
                         DispatchQueue.main.asyncAfter(deadline: delay) {
-                            self.searchView.hideIndicator() }
+                            self.searchView.hideIndicator()
+                        }
                         return
                     }
                     if let movies = movies {
-                        completion(movies)
+                        DispatchQueue.main.async {
+                            self.searchView.hideIndicator()
+                        }
+                        completion(movies, pageNumber)
                     }
                 }
             }
+            
         }
     }
     
@@ -77,7 +82,11 @@ extension MTSearchViewController: SearchViewDelegate {
         let destinationVC = MTMovieViewController(nibName: "MTMovieViewController", bundle: nil)
         getMovies { movies in
             DispatchQueue.main.async {
-                destinationVC.movies = movies
+                destinationVC.movies = movies.0
+                destinationVC.searchTerm = searchTerm
+                if let pageNumber = Int(movies.1) {
+                    destinationVC.pagenumber = pageNumber
+                }
                 destinationVC.title = "Search term: \(searchTerm)"
                 self.searchView.hideIndicator()
                 self.navigationController?.pushViewController(destinationVC, animated: false)

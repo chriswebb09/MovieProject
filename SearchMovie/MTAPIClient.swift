@@ -14,9 +14,9 @@ let imageCache = NSCache<NSString, UIImage>()
 class MTAPIClient {
     
     static func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
-        print(url)
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
             completion(cachedImage)
+            return
         }
         MTAPIClient.downloadData(url: url) { data, response, error in
             if error != nil {
@@ -29,7 +29,6 @@ class MTAPIClient {
                         imageCache.setObject(downloadedImage, forKey: url.absoluteString as NSString)
                         completion(UIImage(data: imageData))
                     }
-                    
                 }
             }
         }

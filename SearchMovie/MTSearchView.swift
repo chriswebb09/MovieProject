@@ -14,6 +14,7 @@ protocol SearchViewDelegate: class {
 
 final class MTSearchView: UIView {
     
+    @IBOutlet weak var loadingLabel: UILabel!
     @IBOutlet weak var indicatorView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchTitleLabel: UILabel!

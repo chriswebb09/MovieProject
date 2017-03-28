@@ -10,7 +10,6 @@ import UIKit
 
 final class MTMovieDataStore {
     
-    private var pageNumber = 0
     private var totalResults: String?
     private var searchTerm: String
     
@@ -18,9 +17,10 @@ final class MTMovieDataStore {
         self.searchTerm = searchTerm
     }
     
-    func fetchNextPage(completion: @escaping(String) -> Void) {
-        pageNumber += 1
-        completion(String(pageNumber))
+    func fetchNextPage(number: Int, completion: @escaping (String) -> Void) {
+        var page = number
+        page += 1
+        completion(String(page))
     }
     
     func sendCall(pageNumber: String, completion: @escaping ([MTMovie]?) -> Void) {

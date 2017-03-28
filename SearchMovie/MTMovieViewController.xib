@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="c7k-ch-oGk">
-                <size key="itemSize" width="190" height="250"/>
+                <size key="itemSize" width="170" height="250"/>
                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                 <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="0.0"/>

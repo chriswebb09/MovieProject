@@ -13,7 +13,10 @@ private let reuseIdentifier = "MovieCell"
 final class MTMovieViewController: UICollectionViewController {
     
     var movies: [MTMovie]!
+    var pagenumber: Int = 0
     var selectedIndex: IndexPath?
+    var dataStore: MTMovieDataStore?
+    var searchTerm: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +41,41 @@ final class MTMovieViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCell
-        cell.setup(hidden: true)
         cell.activityIndicator.startAnimating()
         MTAPIClient.downloadImage(url: movies[indexPath.row].posterImageURL) { image in
             if let posterImage = image {
                 DispatchQueue.main.async {
-                    cell.configureCell(title: self.movies[indexPath.row].title, poster: posterImage)
+                    cell.configureCell(poster: posterImage)
                 }
             }
         }
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == self.movies.count - 1 {
+            if let search = searchTerm {
+                updateMovieForTerm(with: search)
+            }
+        }
+    }
+    
+    func updateMovieForTerm(with searchTerm: String) {
+        dataStore = MTMovieDataStore(searchTerm: searchTerm)
+        if let store = dataStore {
+            store.fetchNextPage(number: pagenumber) { pageNumber in
+                print("Page number: \(pageNumber)")
+                store.sendCall(pageNumber: pageNumber) { movies in
+                    if let movies = movies {
+                        self.pagenumber += 1
+                        DispatchQueue.main.async {
+                            self.movies.append(contentsOf: movies)
+                            self.collectionView?.reloadData()
+                        }
+                    }
+                }
+            }
+        }
     }
     
     // MARK: UICollectionViewDelegate
