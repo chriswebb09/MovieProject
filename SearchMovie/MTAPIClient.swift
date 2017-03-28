@@ -53,10 +53,16 @@ class MTAPIClient {
             let url = URL(string:"http://www.omdbapi.com/?s=\(encodedQuery)&page=\(page)") {
             MTAPIClient.downloadData(url: url) { data, response, error in
                 if error != nil {
+                    print("error \(error)")
                     completion(nil, error)
                     return
                 }
-                if let json = convertDataToJSON(data) {
+                let data = convertDataToJSON(data)
+                guard data != nil else {
+                    completion(nil, nil)
+                    return
+                }
+                if let json = data {
                     completion(json, nil)
                     return
                 }
@@ -69,7 +75,7 @@ class MTAPIClient {
         do {
             return try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? JSON
         } catch {
-            print(error.localizedDescription)
+            print("JSON Error \(error.localizedDescription)")
             return nil
         }
     }

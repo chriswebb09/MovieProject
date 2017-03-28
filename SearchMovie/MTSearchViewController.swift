@@ -39,6 +39,7 @@ final class MTSearchViewController: UIViewController {
                             self.searchView.hideIndicator()
                         }
                         completion(movies, pageNumber)
+                        return
                     }
                 }
             }

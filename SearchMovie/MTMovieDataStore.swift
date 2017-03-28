@@ -26,6 +26,11 @@ final class MTMovieDataStore {
     func sendCall(pageNumber: String, completion: @escaping ([MTMovie]?) -> Void) {
         var movies = [MTMovie]()
         MTAPIClient.search(for: searchTerm, page: pageNumber) { movieData, error in
+            if error != nil || movieData == nil {
+                completion(nil)
+                print("Error")
+                return
+            }
             if let data = movieData {
                 guard let search = data["Search"] as? [[String : String]] else { return }
                 for movie in 0..<search.count {
@@ -35,6 +40,7 @@ final class MTMovieDataStore {
                     }
                 }
                 completion(movies)
+                return
             }
         }
     }
