@@ -90,11 +90,6 @@ extension MTMovieViewController: UISearchBarDelegate {
         view.bringSubview(toFront: collectionView)
         searchForMovie(with: searchText)
     }
-}
-
-// MARK: - UISearchResultsUpdating
-
-extension MTMovieViewController: UISearchResultsUpdating {
     
     func searchForMovie(with term: String) {
         dataSource = MTMovieDataSource(searchTerm: term)
@@ -113,9 +108,5 @@ extension MTMovieViewController: UISearchResultsUpdating {
             }
             self.collectionView.reloadData()
         }
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        // Implement
     }
 }
