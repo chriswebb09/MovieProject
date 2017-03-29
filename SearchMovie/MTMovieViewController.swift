@@ -13,7 +13,7 @@ private let reuseIdentifier = "movieCell"
 class MTMovieViewController: UIViewController {
     
     @IBOutlet weak var content: UIView!
-  
+    
     @IBOutlet fileprivate weak var collectionView: UICollectionView!
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
     @IBOutlet fileprivate weak var collectionViewLayout: UICollectionViewFlowLayout!
@@ -97,12 +97,11 @@ extension MTMovieViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let movies = dataSource?.movies {
-            if indexPath.row == movies.count - 1 {
-                startCall()
-            }
+        if let movies = dataSource?.movies, indexPath.row == movies.count - 1 {
+            startCall()
         }
     }
+    
 }
 
 // MARK: - UISearchBarDelegate
