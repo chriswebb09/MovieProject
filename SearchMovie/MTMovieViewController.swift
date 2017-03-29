@@ -17,7 +17,7 @@ class MTMovieViewController: UIViewController {
     fileprivate var dataStore: MTMovieDataStore?
     fileprivate var movies: [MTMovie]?
     
-    var timer: TimeInterval = 0
+    var timer = Timer()
     
     @IBOutlet fileprivate weak var collectionView: UICollectionView!
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
@@ -94,7 +94,6 @@ extension MTMovieViewController: UICollectionViewDataSource {
 extension MTMovieViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        timer += 0.3
         view.addSubview(collectionView)
         setViewFrame(view: collectionView)
         searchForMovie(with: searchText)
@@ -107,18 +106,24 @@ extension MTMovieViewController: UISearchResultsUpdating {
     
     func searchForMovie(with term: String) {
         dataStore = MTMovieDataStore(searchTerm: term)
-        DispatchQueue.main.asyncAfter(deadline: .now() + timer) {
-            self.dataStore?.fetchNextPage { movieResults, error in
-                self.movies?.removeAll()
-                if movieResults != nil {
-                    if let moviesResults = movieResults {
-                        self.movies?.append(contentsOf: moviesResults)
-                        self.timer = 0
-                    }
+        timer.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 0.5,
+                                    target: self,
+                                    selector: #selector(startCall),
+                                    userInfo: nil,
+                                    repeats: false)
+    }
+    
+    func startCall() {
+        self.dataStore?.fetchNextPage { movieResults, error in
+            self.movies?.removeAll()
+            if movieResults != nil {
+                if let moviesResults = movieResults {
+                    self.movies?.append(contentsOf: moviesResults)
                 }
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
+            }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
             }
         }
     }
