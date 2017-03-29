@@ -70,15 +70,21 @@ extension MTMovieViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MTMovieCell
+        if let url = dataSource?.movies[indexPath.row].posterImageURL {
+            MTAPIClient.downloadImage(url: url) { image, error in
+                if error != nil {
+                    print(error?.localizedDescription ?? "Unable to download image, no specific error")
+                } else {
+                    cell.posterImageView.image = image
+                }
+            }
+        }
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let dataStore = dataSource {
-            return dataStore.movies.count
-        }
-        return 0
+        return dataSource?.movies.count ?? 0
     }
 }
 
@@ -110,9 +116,7 @@ extension MTMovieViewController: UISearchResultsUpdating {
     func startCall() {
         self.dataSource?.movies.removeAll()
         self.dataSource?.fetchNextPage { movieResults, error in
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            self.collectionView.reloadData()
         }
     }
     
