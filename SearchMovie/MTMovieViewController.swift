@@ -14,9 +14,11 @@ class MTMovieViewController: UIViewController {
     
     fileprivate var dataStore: MTMovieDataStore?
     fileprivate var movies: [MTMovie]?
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionViewLayout: UICollectionViewFlowLayout!
+    
     
     convenience init() {
         self.init(nibName: "MTSearchViewController", bundle: nil)
@@ -27,15 +29,21 @@ class MTMovieViewController: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         collectionView.register(UINib(nibName: "MovieCell", bundle: nil), forCellWithReuseIdentifier: "MovieCell")
     }
 }
+
+// MARK: - UICollectionViewDelegate
 
 extension MTMovieViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return false
     }
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension MTMovieViewController: UICollectionViewDataSource {
     
@@ -53,9 +61,13 @@ extension MTMovieViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UISearchBarDelegate
+
 extension MTMovieViewController: UISearchBarDelegate {
     // Implement
 }
+
+// MARK: - UISearchResultsUpdating
 
 extension MTMovieViewController: UISearchResultsUpdating {
     
@@ -64,6 +76,7 @@ extension MTMovieViewController: UISearchResultsUpdating {
         dataStore?.fetchNextPage { movieResults, error in
             if let moviesResults = movieResults {
                 self.movies?.append(contentsOf: moviesResults)
+                self.collectionView.reloadData()
             }
         }
     }
