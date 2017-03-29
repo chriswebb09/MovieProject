@@ -14,7 +14,7 @@ class MTMovieCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        posterImageView.backgroundColor = .blue
     }
 
 }

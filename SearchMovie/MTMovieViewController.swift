@@ -13,38 +13,42 @@ private let reuseIdentifier = "MovieCell"
 class MTMovieViewController: UIViewController {
     
     @IBOutlet weak var content: UIView!
+    
     fileprivate var dataStore: MTMovieDataStore?
     fileprivate var movies: [MTMovie]?
-    fileprivate let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionViewLayout: UICollectionViewFlowLayout!
     
-    
     convenience init() {
         self.init(nibName: "MTMovieViewController", bundle: nil)
-        edgesForExtendedLayout = [] 
-        content = Bundle.main.loadNibNamed("MTEmptyMovieView", owner: self, options: nil)?[0] as! MTEmptyMovieView
-        view = content
         movies = []
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        setupSearchController()
+        content = Bundle.main.loadNibNamed("MTEmptyMovieView", owner: self, options: nil)?[0] as! MTEmptyMovieView
+        view.addSubview(content)
+        setViewFrames(view: content)
+        
     }
     
     func setupCollectionView() {
+        edgesForExtendedLayout = []
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "MovieCell", bundle: nil), forCellWithReuseIdentifier: "MovieCell")
+        collectionView.register(UINib(nibName: "MTMovieCell", bundle: nil), forCellWithReuseIdentifier: "MovieCell")
     }
     
-    func setupSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
+    func setViewFrames(view: UIView) {
+        let viewHeight: CGFloat = UIScreen.main.bounds.size.height * 0.9
+        let viewWidth: CGFloat = UIScreen.main.bounds.size.width
+        let topOffset: CGFloat = UIScreen.main.bounds.size.height * 0.1
+        let viewFrame: CGRect = CGRect(x: 0, y: topOffset, width: viewWidth, height: viewHeight)
+        view.frame = viewFrame
+        
     }
 }
 
@@ -79,8 +83,9 @@ extension MTMovieViewController: UICollectionViewDataSource {
 extension MTMovieViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        view = collectionView
+        setViewFrames(view: collectionView)
         searchForMovie(with: searchText)
-        // Implement
     }
     
 }

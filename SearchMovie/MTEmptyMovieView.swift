@@ -15,6 +15,7 @@ class MTEmptyMovieView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .gray
         fillerImageView.backgroundColor = .purple 
     }
 

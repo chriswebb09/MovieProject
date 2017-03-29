@@ -18,12 +18,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="160" height="174"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N9J-Av-p2R">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N9J-Av-p2R">
                         <rect key="frame" x="0.0" y="0.0" width="160" height="174"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
             </view>
+            <constraints>
+                <constraint firstItem="N9J-Av-p2R" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8Hc-hj-Aqa"/>
+                <constraint firstAttribute="bottom" secondItem="N9J-Av-p2R" secondAttribute="bottom" id="EV9-N0-v4X"/>
+                <constraint firstAttribute="trailing" secondItem="N9J-Av-p2R" secondAttribute="trailing" id="WHT-OP-7HL"/>
+                <constraint firstItem="N9J-Av-p2R" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Wfb-tk-gad"/>
+            </constraints>
             <size key="customSize" width="160" height="174"/>
             <connections>
                 <outlet property="posterImageView" destination="N9J-Av-p2R" id="FGr-Ud-y4Z"/>
