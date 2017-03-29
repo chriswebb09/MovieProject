@@ -76,8 +76,9 @@ extension MTMovieViewController: UICollectionViewDataSource {
         if let movies = movies {
             print("Number of cells: \(movies.count)")
             return movies.count
+        } else {
+            return 0
         }
-        return 0
     }
 }
 
@@ -86,9 +87,11 @@ extension MTMovieViewController: UICollectionViewDataSource {
 extension MTMovieViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        timer += 0.3
         view.addSubview(collectionView)
         setViewFrame(view: collectionView)
         searchForMovie(with: searchText)
+        
     }
     
 }
@@ -99,11 +102,17 @@ extension MTMovieViewController: UISearchResultsUpdating {
     
     func searchForMovie(with term: String) {
         dataStore = MTMovieDataStore(searchTerm: term)
-        timer += 0.3
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + timer) {
+            self.movies?.removeAll()
             self.dataStore?.fetchNextPage { movieResults, error in
-                print("Movies: \(movieResults?.count)")
-                self.movies?.removeAll()
+                if movieResults == nil {
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
+                    return
+                }
+                
                 if let moviesResults = movieResults {
                     self.movies?.append(contentsOf: moviesResults)
                     self.timer = 0
