@@ -14,12 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let store = MTMovieDataStore(searchTerm: "batman")
-        
-        store.fetchNextPage { movies, error in
-            print(movies)
-            print(error)
-        }
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = UINavigationController(rootViewController: MTMovieViewController())
+        window?.makeKeyAndVisible()
         return true
     }
 }

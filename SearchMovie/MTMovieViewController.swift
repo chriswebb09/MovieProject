@@ -12,6 +12,7 @@ private let reuseIdentifier = "MovieCell"
 
 class MTMovieViewController: UIViewController {
     
+    @IBOutlet weak var content: UIView!
     fileprivate var dataStore: MTMovieDataStore?
     fileprivate var movies: [MTMovie]?
     fileprivate let searchController = UISearchController(searchResultsController: nil)
@@ -22,17 +23,28 @@ class MTMovieViewController: UIViewController {
     
     
     convenience init() {
-        self.init(nibName: "MTSearchViewController", bundle: nil)
-        self.movies = []
+        self.init(nibName: "MTMovieViewController", bundle: nil)
+        edgesForExtendedLayout = [] 
+        content = Bundle.main.loadNibNamed("MTEmptyMovieView", owner: self, options: nil)?[0] as! MTEmptyMovieView
+        view = content
+        movies = []
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionView()
+        setupSearchController()
+    }
+    
+    func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "MovieCell", bundle: nil), forCellWithReuseIdentifier: "MovieCell")
+    }
+    
+    func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
-        collectionView.register(UINib(nibName: "MovieCell", bundle: nil), forCellWithReuseIdentifier: "MovieCell")
     }
 }
 
@@ -67,6 +79,7 @@ extension MTMovieViewController: UICollectionViewDataSource {
 extension MTMovieViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchForMovie(with: searchText)
         // Implement
     }
     
