@@ -6,26 +6,29 @@
 //  Copyright © 2017 Christopher Webb-Orenstein. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct MTMovie {
     
     let title: String
     let year: String
     let imdbID: String
-    let imageURL: String
+    let posterImageURL: URL
     
-    init?(_ json: [String : String]) {
-        if json["Type"] != "movie" { return nil }
-        if let title = json["Title"], let imdbID = json["imdbID"], let year = json["Year"], let imageURL = json["Poster"] {
+    init?(json: [String : Any]) {
+        if let title = json["Title"] as? String,
+            let imdbID = json["imdbID"] as? String,
+            let year = json["Year"] as? String,
+            let imageURLString = json["Poster"] as? String,
+            let imageURL = URL(string: imageURLString),
+            let type = json["Type"] as? String,
+            type == "movie" {
             self.title = title
             self.year = year
             self.imdbID = imdbID
-            self.imageURL = imageURL
-            
+            self.posterImageURL = imageURL
         } else {
             return nil
         }
     }
-    
 }
