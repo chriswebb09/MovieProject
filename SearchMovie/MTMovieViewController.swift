@@ -35,9 +35,10 @@ class MTMovieViewController: UIViewController {
         content = Bundle.main.loadNibNamed("MTEmptyMovieView",
                                            owner: self,
                                            options: nil)?[0] as! MTEmptyMovieView
+        view.addSubview(collectionView)
+        setViewFrame(view: collectionView)
         view.addSubview(content)
         setViewFrame(view: content)
-        setViewFrame(view: collectionView)
     }
     
     func setupCollectionView() {
@@ -86,8 +87,7 @@ extension MTMovieViewController: UICollectionViewDataSource {
 extension MTMovieViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        view.addSubview(collectionView)
-        setViewFrame(view: collectionView)
+        view.bringSubview(toFront: collectionView)
         searchForMovie(with: searchText)
     }
 }
@@ -107,7 +107,7 @@ extension MTMovieViewController: UISearchResultsUpdating {
     }
     
     func startCall() {
-        self.dataSource?.fetchNextPage { movieResults, error in
+        dataSource?.fetchNextPage { movieResults, error in
             if self.dataSource?.movies.count == 0 {
                 self.view.bringSubview(toFront: self.content)
             }
