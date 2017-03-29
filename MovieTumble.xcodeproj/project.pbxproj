@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A71AF53A1E82D2E900BBD264 /* MTMovieDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */; };
+		A71AF53A1E82D2E900BBD264 /* MTMovieDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AF5391E82D2E900BBD264 /* MTMovieDataSource.swift */; };
 		A72F6B601E81F2B50015BA6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */; };
 		A72F6B671E81F2B50015BA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A72F6B661E81F2B50015BA6B /* Assets.xcassets */; };
 		A72F6B6A1E81F2B50015BA6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72F6B681E81F2B50015BA6B /* LaunchScreen.storyboard */; };
@@ -42,7 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovieDataStore.swift; sourceTree = "<group>"; };
+		A71AF5391E82D2E900BBD264 /* MTMovieDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovieDataSource.swift; sourceTree = "<group>"; };
 		A72F6B5C1E81F2B50015BA6B /* MovieTumble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTumble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A72F6B661E81F2B50015BA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 				A7596BCE1E8B5524003DE389 /* MTMovieViewController.xib */,
 				A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */,
 				A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */,
-				A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */,
+				A71AF5391E82D2E900BBD264 /* MTMovieDataSource.swift */,
 				A7596BCB1E8B5334003DE389 /* NSError+Extension.swift */,
 				A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */,
 				A72F6B661E81F2B50015BA6B /* Assets.xcassets */,
@@ -289,7 +289,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A72F6B8E1E81FEF50015BA6B /* MTMovie.swift in Sources */,
-				A71AF53A1E82D2E900BBD264 /* MTMovieDataStore.swift in Sources */,
+				A71AF53A1E82D2E900BBD264 /* MTMovieDataSource.swift in Sources */,
 				A72F6B901E81FF060015BA6B /* MTAPIClient.swift in Sources */,
 				A7596BD61E8B595C003DE389 /* MTEmptyMovieView.swift in Sources */,
 				A7596BCC1E8B5334003DE389 /* NSError+Extension.swift in Sources */,

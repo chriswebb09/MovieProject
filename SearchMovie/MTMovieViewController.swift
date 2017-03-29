@@ -13,26 +13,21 @@ private let reuseIdentifier = "movieCell"
 class MTMovieViewController: UIViewController {
     
     @IBOutlet weak var content: UIView!
-    
-    fileprivate var dataStore: MTMovieDataStore?
-    fileprivate var movies: [MTMovie]?
-    
-    var timer = Timer()
-    
     @IBOutlet fileprivate weak var collectionView: UICollectionView!
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
     @IBOutlet fileprivate weak var collectionViewLayout: UICollectionViewFlowLayout!
     
+    fileprivate var dataSource: MTMovieDataSource?
+    var timer = Timer()
+    
     convenience init() {
         self.init(nibName: "MTMovieViewController", bundle: nil)
-        movies = []
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
-    
     
     func setup() {
         setupCollectionView()
@@ -80,12 +75,10 @@ extension MTMovieViewController: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let movies = movies {
-            print("Number of cells: \(movies.count)")
-            return movies.count
-        } else {
-            return 0
+        if let dataStore = dataSource {
+            return dataStore.movies.count
         }
+        return 0
     }
 }
 
@@ -105,23 +98,18 @@ extension MTMovieViewController: UISearchBarDelegate {
 extension MTMovieViewController: UISearchResultsUpdating {
     
     func searchForMovie(with term: String) {
-        dataStore = MTMovieDataStore(searchTerm: term)
+        dataSource = MTMovieDataSource(searchTerm: term)
         timer.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 0.5,
-                                    target: self,
-                                    selector: #selector(startCall),
-                                    userInfo: nil,
-                                    repeats: false)
+                                     target: self,
+                                     selector: #selector(startCall),
+                                     userInfo: nil,
+                                     repeats: false)
     }
     
     func startCall() {
-        self.dataStore?.fetchNextPage { movieResults, error in
-            self.movies?.removeAll()
-            if movieResults != nil {
-                if let moviesResults = movieResults {
-                    self.movies?.append(contentsOf: moviesResults)
-                }
-            }
+        self.dataSource?.movies.removeAll()
+        self.dataSource?.fetchNextPage { movieResults, error in
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }

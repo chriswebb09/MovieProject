@@ -8,11 +8,12 @@
 
 import UIKit
 
-final class MTMovieDataStore {
+final class MTMovieDataSource {
     
     fileprivate var searchTerm: String
     fileprivate var totalResults: String?
     fileprivate var pageNumber = 1
+    var movies: [MTMovie] = [MTMovie]()
     
     init(searchTerm: String) {
         self.searchTerm = searchTerm
@@ -23,17 +24,18 @@ final class MTMovieDataStore {
             if let error = error {
                 completion(nil, error)
             } else if let data = data, let moviesJSON = data["Search"] as? [[String : String]] {
-                var movies = [MTMovie]()
                 for movieJSON in moviesJSON {
                     if let movie = MTMovie(json: movieJSON) {
-                        movies.append(movie)
+                        self.movies.append(movie)
                     }
                 }
                 self.pageNumber += 1
-                completion(movies, nil)
+                completion(self.movies, nil)
             } else {
                 completion(nil, NSError.generalParsingError(domain: ""))
             }
         }
     }
 }
+
+
