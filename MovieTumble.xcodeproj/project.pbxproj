@@ -15,6 +15,7 @@
 		A72F6B801E81F2B50015BA6B /* SearchMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B7F1E81F2B50015BA6B /* SearchMovieUITests.swift */; };
 		A72F6B8E1E81FEF50015BA6B /* MTMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */; };
 		A72F6B901E81FF060015BA6B /* MTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */; };
+		A7596BCC1E8B5334003DE389 /* NSError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7596BCB1E8B5334003DE389 /* NSError+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		A72F6B811E81F2B50015BA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovie.swift; sourceTree = "<group>"; };
 		A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTAPIClient.swift; sourceTree = "<group>"; };
+		A7596BCB1E8B5334003DE389 /* NSError+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */,
 				A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */,
 				A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */,
+				A7596BCB1E8B5334003DE389 /* NSError+Extension.swift */,
 				A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */,
 				A72F6B661E81F2B50015BA6B /* Assets.xcassets */,
 				A72F6B681E81F2B50015BA6B /* LaunchScreen.storyboard */,
@@ -267,6 +270,7 @@
 				A72F6B8E1E81FEF50015BA6B /* MTMovie.swift in Sources */,
 				A71AF53A1E82D2E900BBD264 /* MTMovieDataStore.swift in Sources */,
 				A72F6B901E81FF060015BA6B /* MTAPIClient.swift in Sources */,
+				A7596BCC1E8B5334003DE389 /* NSError+Extension.swift in Sources */,
 				A72F6B601E81F2B50015BA6B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
