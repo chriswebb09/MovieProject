@@ -8,14 +8,20 @@
 
 import UIKit
 
+private let reuseIdentifier = "MovieCell"
+
 class MTMovieViewController: UIViewController {
     
+    fileprivate var dataSource: MTMovieDataStore?
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionViewLayout: UICollectionViewFlowLayout!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "MovieCell", bundle: nil), forCellWithReuseIdentifier: "MovieCell")
     }
 }
 
@@ -46,6 +52,4 @@ extension MTMovieViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         // Implment
     }
-    
-    
 }
