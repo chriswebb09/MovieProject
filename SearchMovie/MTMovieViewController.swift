@@ -13,14 +13,15 @@ private let reuseIdentifier = "movieCell"
 class MTMovieViewController: UIViewController {
     
     @IBOutlet weak var content: UIView!
-    var searchTerm: String?
-    var selectedIndex: IndexPath?
+  
     @IBOutlet fileprivate weak var collectionView: UICollectionView!
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
     @IBOutlet fileprivate weak var collectionViewLayout: UICollectionViewFlowLayout!
     
     fileprivate var dataSource: MTMovieDataSource?
-    var timer = Timer()
+    fileprivate var searchTerm: String?
+    fileprivate var selectedIndex: IndexPath?
+    fileprivate var timer = Timer()
     
     convenience init() {
         self.init(nibName: "MTMovieViewController", bundle: nil)
