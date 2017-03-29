@@ -50,7 +50,6 @@ class MTMovieViewController: UIViewController {
         let topOffset: CGFloat = UIScreen.main.bounds.size.height * 0.1
         let viewFrame: CGRect = CGRect(x: 0, y: topOffset, width: viewWidth, height: viewHeight)
         view.frame = viewFrame
-        
     }
 }
 
@@ -91,9 +90,7 @@ extension MTMovieViewController: UISearchBarDelegate {
         view.addSubview(collectionView)
         setViewFrame(view: collectionView)
         searchForMovie(with: searchText)
-        
     }
-    
 }
 
 // MARK: - UISearchResultsUpdating
@@ -102,24 +99,17 @@ extension MTMovieViewController: UISearchResultsUpdating {
     
     func searchForMovie(with term: String) {
         dataStore = MTMovieDataStore(searchTerm: term)
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + timer) {
-            self.movies?.removeAll()
             self.dataStore?.fetchNextPage { movieResults, error in
-                if movieResults == nil {
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
+                self.movies?.removeAll()
+                if movieResults != nil {
+                    if let moviesResults = movieResults {
+                        self.movies?.append(contentsOf: moviesResults)
+                        self.timer = 0
                     }
-                    return
                 }
-                
-                if let moviesResults = movieResults {
-                    self.movies?.append(contentsOf: moviesResults)
-                    self.timer = 0
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                    }
-                    
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
                 }
             }
         }
