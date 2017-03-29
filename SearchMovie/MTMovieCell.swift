@@ -17,7 +17,7 @@ class MTMovieCell: UICollectionViewCell {
         posterImageView.backgroundColor = .blue
     }
     
-    func configureCell(for movie: MTMovie) {
-        posterImageView.setImage(for: movie.posterImageURL)
+    func configureCell(with movie: MTMovie) {
+        posterImageView.downloadImage(with: movie.posterImageURL, placeholderImage: nil)
     }
 }

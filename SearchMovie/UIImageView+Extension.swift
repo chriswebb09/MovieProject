@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImageView {
     
-    func setImage(for url: URL) {
+    func downloadImage(with url: URL, placeholderImage: UIImage?) {
         MTAPIClient.downloadImage(url: url) { image, error in
             if error != nil {
                 print(error?.localizedDescription ?? "Unable to download image, no specific error")

@@ -71,7 +71,7 @@ extension MTMovieViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MTMovieCell
         if let movie = dataSource?.movies[indexPath.row] {
-            cell.configureCell(for: movie)
+            cell.configureCell(with: movie)
         }
         return cell
     }
@@ -108,7 +108,6 @@ extension MTMovieViewController: UISearchResultsUpdating {
     }
     
     func startCall() {
-        self.dataSource?.movies.removeAll()
         self.dataSource?.fetchNextPage { movieResults, error in
             self.collectionView.reloadData()
         }
