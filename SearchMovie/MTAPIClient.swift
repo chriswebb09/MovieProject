@@ -9,75 +9,66 @@
 import UIKit
 
 typealias JSON = [String : Any]
-let imageCache = NSCache<NSString, UIImage>()
+fileprivate let imageCache = NSCache<NSString, UIImage>()
+
+extension NSError {
+    static func generalParsingError(domain: String) -> Error {
+        return NSError(domain: domain, code: 400, userInfo: [NSLocalizedDescriptionKey : NSLocalizedString("Error retrieving data", comment: "General Parsing Error Description")])
+    }
+}
 
 class MTAPIClient {
     
-    static func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
+    //MARK: - Public
+    
+    static func downloadImage(url: URL, completion: @escaping (_ image: UIImage?, _ error: Error? ) -> Void) {
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
-            completion(cachedImage)
-            return
-        }
-        MTAPIClient.downloadData(url: url) { data, response, error in
-            if error != nil {
-                print(error?.localizedDescription ?? "Unable to get specific error")
-                completion(nil)
-                return
+            completion(cachedImage, nil)
+        } else {
+            MTAPIClient.downloadData(url: url) { data, response, error in
+                if let error = error {
+                    completion(nil, error)
+                    
+                } else if let data = data, let image = UIImage(data: data) {
+                    imageCache.setObject(image, forKey: url.absoluteString as NSString)
+                    completion(image, nil)
+                } else {
+                    completion(nil, NSError.generalParsingError(domain: url.absoluteString))
+                }
             }
-            if let imageData = data {
-                DispatchQueue.main.async {
-                    if let downloadedImage = UIImage(data: imageData) {
-                        imageCache.setObject(downloadedImage, forKey: url.absoluteString as NSString)
-                        completion(downloadedImage)
-                        return
+        }
+    }
+    
+    static func search(for query: String, page: Int, completion: @escaping (_ responseObject: [String : Any]?, _ error: Error?) -> Void) {
+        if let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+            let url = URL(string:"http://www.omdbapi.com/?s=\(encodedQuery)&page=\(page)") {
+            MTAPIClient.downloadData(url: url) { data, response, error in
+                if let error = error {
+                    completion(nil, error)
+                } else {
+                    if let data = data, let responseObject = self.convertToJSON(with: data) {
+                        completion(responseObject, nil)
+                    } else {
+                        completion(nil, NSError.generalParsingError(domain: url.absoluteString))
                     }
                 }
             }
         }
     }
     
-    static func downloadData(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
-        let session = URLSession(configuration: .ephemeral)
-        let urlRequest = URLRequest(url: url)
-        session.dataTask(with: urlRequest) { data, response, error in
-            print("Data: \(data)")
-            print("Response: \(response)")
-            print("Error: \(error?.localizedDescription)")
-            print("URL: \(url.absoluteString)")
+    //MARK: - Private
+
+    fileprivate static func downloadData(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession(configuration: .ephemeral).dataTask(with: URLRequest(url: url)) { data, response, error in
             completion(data, response, error)
             }.resume()
     }
     
-    static func search(for query: String?, page: String, completion: @escaping (_ responseObject: [String : Any]?, _ error: Error?) -> Void) {
-        if let encodedQuery = query?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
-            let url = URL(string:"http://www.omdbapi.com/?s=\(encodedQuery)&page=\(page)") {
-            MTAPIClient.downloadData(url: url) { data, response, error in
-                if error != nil {
-                    print("error \(error)")
-                    completion(nil, error)
-                    return
-                }
-                let data = convertDataToJSON(data)
-                guard data != nil else {
-                    completion(nil, nil)
-                    return
-                }
-                if let json = data {
-                    completion(json, nil)
-                    return
-                }
-            }
-        }
-    }
-    
-    static func convertDataToJSON(_ data: Data?) -> JSON? {
-        guard let data = data else { return nil }
+    fileprivate static func convertToJSON(with data: Data) -> JSON? {
         do {
             return try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? JSON
         } catch {
-            print("JSON Error \(error.localizedDescription)")
             return nil
         }
     }
 }
-

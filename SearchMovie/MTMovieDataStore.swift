@@ -10,37 +10,34 @@ import UIKit
 
 final class MTMovieDataStore {
     
-    private var totalResults: String?
-    private var searchTerm: String
+    fileprivate var searchTerm: String
+    fileprivate var totalResults: String?
+    fileprivate var pageNumber = 1
     
     init(searchTerm: String) {
         self.searchTerm = searchTerm
     }
     
-    func fetchNextPage(number: Int, completion: @escaping (String) -> Void) {
-        var page = number
-        page += 1
-        completion(String(page))
-    }
-    
-    func sendCall(pageNumber: String, completion: @escaping ([MTMovie]?) -> Void) {
-        var movies = [MTMovie]()
-        MTAPIClient.search(for: searchTerm, page: pageNumber) { movieData, error in
-            if error != nil || movieData == nil {
-                completion(nil)
-                print("Error")
-                return
-            }
-            if let data = movieData {
-                guard let search = data["Search"] as? [[String : String]] else { return }
-                for movie in 0..<search.count {
-                    let movie = MTMovie(search[movie])
-                    if let movie = movie {
+    func fetchNextPage(completion: @escaping (_ movies: [MTMovie]?, _ error: Error?) -> Void) {
+        
+        MTAPIClient.search(for: searchTerm, page: pageNumber) { data, error in
+
+            if let error = error {
+                completion(nil, error)
+                
+            } else if let data = data, let moviesJSON = data["Search"] as? [[String : String]] {
+                var movies = [MTMovie]()
+                
+                for movieJSON in moviesJSON {
+                    if let movie = MTMovie(json: movieJSON) {
                         movies.append(movie)
                     }
                 }
-                completion(movies)
-                return
+                self.pageNumber += 1
+                completion(movies, nil)
+                
+            } else {
+                completion(nil, NSError.generalParsingError(domain: ""))
             }
         }
     }
