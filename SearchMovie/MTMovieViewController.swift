@@ -50,7 +50,7 @@ class MTMovieViewController: UIViewController {
     func setViewFrame(view: UIView) {
         let viewHeight: CGFloat = UIScreen.main.bounds.size.height * 0.9
         let viewWidth: CGFloat = UIScreen.main.bounds.size.width
-        let topOffset: CGFloat = UIScreen.main.bounds.size.height * 0.1
+        let topOffset: CGFloat = UIScreen.main.bounds.size.height * 0.059
         let viewFrame: CGRect = CGRect(x: 0, y: topOffset, width: viewWidth, height: viewHeight)
         view.frame = viewFrame
     }
@@ -75,7 +75,6 @@ extension MTMovieViewController: UICollectionViewDataSource {
         }
         return cell
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource?.movies.count ?? 0
@@ -109,6 +108,9 @@ extension MTMovieViewController: UISearchResultsUpdating {
     
     func startCall() {
         self.dataSource?.fetchNextPage { movieResults, error in
+            if self.dataSource?.movies.count == 0 {
+                self.view.bringSubview(toFront: self.content)
+            }
             self.collectionView.reloadData()
         }
     }
