@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let reuseIdentifier = "MovieCell"
+private let reuseIdentifier = "movieCell"
 
 class MTMovieViewController: UIViewController {
     
@@ -17,9 +17,11 @@ class MTMovieViewController: UIViewController {
     fileprivate var dataStore: MTMovieDataStore?
     fileprivate var movies: [MTMovie]?
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var collectionViewLayout: UICollectionViewFlowLayout!
+    var timer: TimeInterval = 0
+    
+    @IBOutlet fileprivate weak var collectionView: UICollectionView!
+    @IBOutlet fileprivate weak var searchBar: UISearchBar!
+    @IBOutlet fileprivate weak var collectionViewLayout: UICollectionViewFlowLayout!
     
     convenience init() {
         self.init(nibName: "MTMovieViewController", bundle: nil)
@@ -31,18 +33,18 @@ class MTMovieViewController: UIViewController {
         setupCollectionView()
         content = Bundle.main.loadNibNamed("MTEmptyMovieView", owner: self, options: nil)?[0] as! MTEmptyMovieView
         view.addSubview(content)
-        setViewFrames(view: content)
-        
+        setViewFrame(view: content)
+        setViewFrame(view: collectionView)
     }
     
     func setupCollectionView() {
         edgesForExtendedLayout = []
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "MTMovieCell", bundle: nil), forCellWithReuseIdentifier: "MovieCell")
+        collectionView.register(UINib(nibName: "MTMovieCell", bundle: nil), forCellWithReuseIdentifier: "movieCell")
     }
     
-    func setViewFrames(view: UIView) {
+    func setViewFrame(view: UIView) {
         let viewHeight: CGFloat = UIScreen.main.bounds.size.height * 0.9
         let viewWidth: CGFloat = UIScreen.main.bounds.size.width
         let topOffset: CGFloat = UIScreen.main.bounds.size.height * 0.1
@@ -72,6 +74,7 @@ extension MTMovieViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let movies = movies {
+            print("Number of cells: \(movies.count)")
             return movies.count
         }
         return 0
@@ -83,8 +86,8 @@ extension MTMovieViewController: UICollectionViewDataSource {
 extension MTMovieViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        view = collectionView
-        setViewFrames(view: collectionView)
+        view.addSubview(collectionView)
+        setViewFrame(view: collectionView)
         searchForMovie(with: searchText)
     }
     
@@ -96,10 +99,19 @@ extension MTMovieViewController: UISearchResultsUpdating {
     
     func searchForMovie(with term: String) {
         dataStore = MTMovieDataStore(searchTerm: term)
-        dataStore?.fetchNextPage { movieResults, error in
-            if let moviesResults = movieResults {
-                self.movies?.append(contentsOf: moviesResults)
-                self.collectionView.reloadData()
+        timer += 0.3
+        DispatchQueue.main.asyncAfter(deadline: .now() + timer) {
+            self.dataStore?.fetchNextPage { movieResults, error in
+                print("Movies: \(movieResults?.count)")
+                self.movies?.removeAll()
+                if let moviesResults = movieResults {
+                    self.movies?.append(contentsOf: moviesResults)
+                    self.timer = 0
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
+                    
+                }
             }
         }
     }

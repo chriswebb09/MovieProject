@@ -10,8 +10,8 @@ import UIKit
 
 class MTEmptyMovieView: UIView {
     
-    @IBOutlet weak var descriptionLabel: UITextView!
-    @IBOutlet weak var fillerImageView: UIImageView!
+    @IBOutlet fileprivate weak var descriptionLabel: UITextView!
+    @IBOutlet fileprivate weak var fillerImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

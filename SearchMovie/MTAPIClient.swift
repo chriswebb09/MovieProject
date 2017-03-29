@@ -33,7 +33,7 @@ class MTAPIClient {
         }
     }
     
-    static func search(for query: String, page: Int, completion: @escaping (_ responseObject: [String : Any]?, _ error: Error?) -> Void) {
+    static func search(for query: String, page: Int, completion: @escaping (_ responseObject: JSON?, _ error: Error?) -> Void) {
         if let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             let url = URL(string:"http://www.omdbapi.com/?s=\(encodedQuery)&page=\(page)") {
             MTAPIClient.downloadData(url: url) { data, response, error in
