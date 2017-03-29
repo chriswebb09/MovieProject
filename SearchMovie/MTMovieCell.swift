@@ -9,12 +9,15 @@
 import UIKit
 
 class MTMovieCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var posterImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         posterImageView.backgroundColor = .blue
     }
-
+    
+    func configureCell(for movie: MTMovie) {
+        posterImageView.setImage(for: movie.posterImageURL)
+    }
 }

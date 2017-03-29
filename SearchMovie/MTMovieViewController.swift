@@ -70,14 +70,8 @@ extension MTMovieViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MTMovieCell
-        if let url = dataSource?.movies[indexPath.row].posterImageURL {
-            MTAPIClient.downloadImage(url: url) { image, error in
-                if error != nil {
-                    print(error?.localizedDescription ?? "Unable to download image, no specific error")
-                } else {
-                    cell.posterImageView.image = image
-                }
-            }
+        if let movie = dataSource?.movies[indexPath.row] {
+            cell.configureCell(for: movie)
         }
         return cell
     }
