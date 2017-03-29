@@ -13,6 +13,8 @@ private let reuseIdentifier = "movieCell"
 class MTMovieViewController: UIViewController {
     
     @IBOutlet weak var content: UIView!
+    var searchTerm: String?
+    var selectedIndex: IndexPath?
     @IBOutlet fileprivate weak var collectionView: UICollectionView!
     @IBOutlet fileprivate weak var searchBar: UISearchBar!
     @IBOutlet fileprivate weak var collectionViewLayout: UICollectionViewFlowLayout!
@@ -27,6 +29,8 @@ class MTMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupSearchBar()
+        searchBar.showsCancelButton = false
     }
     
     func setup() {
@@ -61,7 +65,17 @@ class MTMovieViewController: UIViewController {
 
 extension MTMovieViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return false
+        if let selected = selectedIndex, let selectedCell = collectionView.cellForItem(at: selected) as? MTMovieCell {
+            selectedCell.isSelected = !selectedCell.isSelected
+            selectedCell.setStyle(selected: selectedCell.isSelected)
+            selectedIndex = nil
+        }
+        if let cell = collectionView.cellForItem(at: indexPath) as? MTMovieCell {
+            selectedIndex = indexPath
+            cell.isSelected = true
+            cell.setStyle(selected: cell.isSelected)
+        }
+        return true
     }
 }
 
@@ -80,6 +94,14 @@ extension MTMovieViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource?.movies.count ?? 0
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let movies = dataSource?.movies {
+            if indexPath.row == movies.count - 1 {
+                startCall()
+            }
+        }
+    }
 }
 
 // MARK: - UISearchBarDelegate
@@ -87,8 +109,11 @@ extension MTMovieViewController: UICollectionViewDataSource {
 extension MTMovieViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchTerm = nil
+        searchBar.showsCancelButton = true
         view.bringSubview(toFront: collectionView)
         searchForMovie(with: searchText)
+        searchTerm = searchText
     }
     
     func searchForMovie(with term: String) {
@@ -108,5 +133,23 @@ extension MTMovieViewController: UISearchBarDelegate {
             }
             self.collectionView.reloadData()
         }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
+        dataSource?.movies.removeAll()
+        collectionView.reloadData()
+    }
+    
+    func setupSearchBar() {
+        searchBar.barTintColor = .black
+        searchBar.tintColor = .black
+        searchBar.searchBarStyle = .minimal
     }
 }

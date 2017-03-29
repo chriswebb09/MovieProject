@@ -20,4 +20,14 @@ class MTMovieCell: UICollectionViewCell {
     func configureCell(with movie: MTMovie) {
         posterImageView.downloadImage(with: movie.posterImageURL, placeholderImage: nil)
     }
+    
+    func setStyle(selected: Bool) {
+        posterImageView.isHidden = selected
+        backgroundColor = selected ? .red : .gray
+    }
+    
+    override func prepareForReuse() {
+        posterImageView.image = nil
+        super.prepareForReuse()
+    }
 }
