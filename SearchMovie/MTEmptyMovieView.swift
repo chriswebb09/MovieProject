@@ -9,14 +9,12 @@
 import UIKit
 
 class MTEmptyMovieView: UIView {
-    
     @IBOutlet fileprivate weak var descriptionLabel: UITextView!
     @IBOutlet fileprivate weak var fillerImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = .gray
-        fillerImageView.backgroundColor = .purple 
+        fillerImageView.backgroundColor = .purple
     }
-
 }

@@ -30,8 +30,16 @@ class MTMovieViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+    
+    
+    func setup() {
         setupCollectionView()
-        content = Bundle.main.loadNibNamed("MTEmptyMovieView", owner: self, options: nil)?[0] as! MTEmptyMovieView
+        setupCollectionView()
+        content = Bundle.main.loadNibNamed("MTEmptyMovieView",
+                                           owner: self,
+                                           options: nil)?[0] as! MTEmptyMovieView
         view.addSubview(content)
         setViewFrame(view: content)
         setViewFrame(view: collectionView)
@@ -116,6 +124,6 @@ extension MTMovieViewController: UISearchResultsUpdating {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        // Implment
+        // Implement
     }
 }
