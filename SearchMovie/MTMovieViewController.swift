@@ -15,6 +15,7 @@ class MTMovieViewController: UIViewController {
     fileprivate var dataStore: MTMovieDataStore?
     fileprivate var movies: [MTMovie]?
     fileprivate let searchController = UISearchController(searchResultsController: nil)
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionViewLayout: UICollectionViewFlowLayout!
@@ -64,7 +65,11 @@ extension MTMovieViewController: UICollectionViewDataSource {
 // MARK: - UISearchBarDelegate
 
 extension MTMovieViewController: UISearchBarDelegate {
-    // Implement
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // Implement
+    }
+    
 }
 
 // MARK: - UISearchResultsUpdating

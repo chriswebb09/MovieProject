@@ -17,8 +17,17 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="160" height="174"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N9J-Av-p2R">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="174"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                </subviews>
             </view>
             <size key="customSize" width="160" height="174"/>
+            <connections>
+                <outlet property="posterImageView" destination="N9J-Av-p2R" id="FGr-Ud-y4Z"/>
+            </connections>
             <point key="canvasLocation" x="89" y="168"/>
         </collectionViewCell>
     </objects>

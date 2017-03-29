@@ -10,6 +10,8 @@ import UIKit
 
 class MTMovieCell: UICollectionViewCell {
 
+    @IBOutlet weak var posterImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
