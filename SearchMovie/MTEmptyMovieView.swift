@@ -14,7 +14,7 @@ class MTEmptyMovieView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = .gray
-        fillerImageView.backgroundColor = .purple
+        fillerImageView.image = #imageLiteral(resourceName: "film")
+        descriptionLabel.text = "Search for movie titles and then select your favorites!"
     }
 }

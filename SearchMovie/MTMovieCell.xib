@@ -12,28 +12,49 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="movieCell" id="gTV-IL-0wX" customClass="MTMovieCell" customModule="MovieTumble" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="160" height="174"/>
+            <rect key="frame" x="0.0" y="0.0" width="160" height="278"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="160" height="174"/>
+                <rect key="frame" x="0.0" y="0.0" width="160" height="278"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N9J-Av-p2R">
-                        <rect key="frame" x="0.0" y="0.0" width="160" height="174"/>
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="278"/>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBV-jJ-Qtz">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="278"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R6T-8x-crK">
+                                <rect key="frame" x="0.0" y="-3" width="160" height="281"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="R6T-8x-crK" secondAttribute="bottom" id="7Fy-U6-Dtb"/>
+                            <constraint firstItem="R6T-8x-crK" firstAttribute="top" secondItem="TBV-jJ-Qtz" secondAttribute="top" constant="-3" id="IkB-8a-R1c"/>
+                            <constraint firstAttribute="trailing" secondItem="R6T-8x-crK" secondAttribute="trailing" id="xEP-Kg-aOx"/>
+                            <constraint firstItem="R6T-8x-crK" firstAttribute="leading" secondItem="TBV-jJ-Qtz" secondAttribute="leading" id="xmI-Tk-5bV"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="N9J-Av-p2R" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8Hc-hj-Aqa"/>
-                <constraint firstAttribute="bottom" secondItem="N9J-Av-p2R" secondAttribute="bottom" id="EV9-N0-v4X"/>
-                <constraint firstAttribute="trailing" secondItem="N9J-Av-p2R" secondAttribute="trailing" id="WHT-OP-7HL"/>
-                <constraint firstItem="N9J-Av-p2R" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Wfb-tk-gad"/>
+                <constraint firstItem="N9J-Av-p2R" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5sI-ms-Jgr"/>
+                <constraint firstItem="N9J-Av-p2R" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="HEC-Jy-TtS"/>
+                <constraint firstItem="N9J-Av-p2R" firstAttribute="trailing" secondItem="TBV-jJ-Qtz" secondAttribute="trailing" id="MsB-di-1FB"/>
+                <constraint firstAttribute="trailing" secondItem="N9J-Av-p2R" secondAttribute="trailing" id="WhB-vb-u7b"/>
+                <constraint firstItem="TBV-jJ-Qtz" firstAttribute="leading" secondItem="N9J-Av-p2R" secondAttribute="leading" id="XBa-IS-BQX"/>
+                <constraint firstItem="TBV-jJ-Qtz" firstAttribute="bottom" secondItem="N9J-Av-p2R" secondAttribute="bottom" id="pb6-7v-zS9"/>
+                <constraint firstItem="N9J-Av-p2R" firstAttribute="top" secondItem="TBV-jJ-Qtz" secondAttribute="top" id="rhF-em-jmu"/>
+                <constraint firstAttribute="bottom" secondItem="TBV-jJ-Qtz" secondAttribute="bottom" id="zfb-dy-Nff"/>
             </constraints>
-            <size key="customSize" width="160" height="174"/>
+            <size key="customSize" width="160" height="278"/>
             <connections>
                 <outlet property="posterImageView" destination="N9J-Av-p2R" id="FGr-Ud-y4Z"/>
+                <outlet property="selectedView" destination="TBV-jJ-Qtz" id="9OZ-C4-ClV"/>
+                <outlet property="starImageView" destination="R6T-8x-crK" id="tCq-pG-JJE"/>
             </connections>
-            <point key="canvasLocation" x="89" y="168"/>
+            <point key="canvasLocation" x="89" y="119"/>
         </collectionViewCell>
     </objects>
 </document>

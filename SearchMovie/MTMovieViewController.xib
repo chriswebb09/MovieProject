@@ -32,7 +32,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="9E5-D7-VZl">
-                                <size key="itemSize" width="200" height="250"/>
+                                <size key="itemSize" width="180" height="250"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -41,10 +41,10 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <searchBar contentMode="redraw" fixedFrame="YES" barStyle="black" searchBarStyle="prominent" placeholder="Search for movies..." showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rbg-Ru-XXc">
+                <searchBar alpha="0.5" contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" placeholder="Search for movies..." showsCancelButton="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rbg-Ru-XXc">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <color key="barTintColor" red="0.65982318360000003" green="0.67133012540000003" blue="0.70483026650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="Nj0-hR-YU5"/>

@@ -30,8 +30,6 @@ class MTMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        setupSearchBar()
-        searchBar.showsCancelButton = false
     }
     
     func setup() {
@@ -44,6 +42,7 @@ class MTMovieViewController: UIViewController {
         setViewFrame(view: collectionView)
         view.addSubview(content)
         setViewFrame(view: content)
+        searchBar.showsCancelButton = false
     }
     
     func setupCollectionView() {
@@ -56,7 +55,7 @@ class MTMovieViewController: UIViewController {
     func setViewFrame(view: UIView) {
         let viewHeight: CGFloat = UIScreen.main.bounds.size.height * 0.9
         let viewWidth: CGFloat = UIScreen.main.bounds.size.width
-        let topOffset: CGFloat = UIScreen.main.bounds.size.height * 0.059
+        let topOffset: CGFloat = UIScreen.main.bounds.size.height * 0.065
         let viewFrame: CGRect = CGRect(x: 0, y: topOffset, width: viewWidth, height: viewHeight)
         view.frame = viewFrame
     }
@@ -97,7 +96,8 @@ extension MTMovieViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let movies = dataSource?.movies, indexPath.row == movies.count - 1 {
+        if let movies = dataSource?.movies,
+            indexPath.row == movies.count - 1 {
             startCall()
         }
     }
@@ -145,11 +145,5 @@ extension MTMovieViewController: UISearchBarDelegate {
         searchBar.endEditing(true)
         dataSource?.movies.removeAll()
         collectionView.reloadData()
-    }
-    
-    func setupSearchBar() {
-        searchBar.barTintColor = .black
-        searchBar.tintColor = .black
-        searchBar.searchBarStyle = .minimal
     }
 }

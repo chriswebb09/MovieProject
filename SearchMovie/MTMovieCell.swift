@@ -10,6 +10,8 @@ import UIKit
 
 class MTMovieCell: UICollectionViewCell {
     
+    @IBOutlet weak var selectedView: UIView!
+    @IBOutlet weak var starImageView: UIImageView!
     @IBOutlet weak var posterImageView: UIImageView!
     
     override func awakeFromNib() {
@@ -18,12 +20,14 @@ class MTMovieCell: UICollectionViewCell {
     }
     
     func configureCell(with movie: MTMovie) {
-        posterImageView.downloadImage(with: movie.posterImageURL, placeholderImage: nil)
+        posterImageView.downloadImage(with: movie.posterImageURL, placeholderImage: #imageLiteral(resourceName: "star-white"))
+        starImageView.image = #imageLiteral(resourceName: "stargold")
+        selectedView.isHidden = true
     }
     
     func setStyle(selected: Bool) {
-        posterImageView.isHidden = selected
-        backgroundColor = selected ? .red : .gray
+        selectedView.alpha = 0.5
+        selectedView.isHidden = !selected
     }
     
     override func prepareForReuse() {
