@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MTMovieViewController" customModule="MovieTumble" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="Ip2-1F-e3N" id="8M8-3o-S7M"/>
+                <outlet property="collectionViewLayout" destination="9E5-D7-VZl" id="e2H-o7-2u8"/>
+                <outlet property="content" destination="vr1-lp-y76" id="vDW-OG-2dI"/>
+                <outlet property="searchBar" destination="Rbg-Ru-XXc" id="RAA-w7-xhE"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vr1-lp-y76">
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ip2-1F-e3N">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="9E5-D7-VZl">
+                                <size key="itemSize" width="180" height="250"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <searchBar alpha="0.5" contentMode="redraw" fixedFrame="YES" searchBarStyle="prominent" placeholder="Search for movies..." showsCancelButton="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rbg-Ru-XXc">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Nj0-hR-YU5"/>
+                    </connections>
+                </searchBar>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <point key="canvasLocation" x="33.5" y="105.5"/>
+        </view>
+    </objects>
+</document>

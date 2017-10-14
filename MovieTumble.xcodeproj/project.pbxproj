@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A71AF53A1E82D2E900BBD264 /* MTMovieDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */; };
+		A71AF53A1E82D2E900BBD264 /* MTMovieDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71AF5391E82D2E900BBD264 /* MTMovieDataSource.swift */; };
 		A72F6B601E81F2B50015BA6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */; };
 		A72F6B671E81F2B50015BA6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A72F6B661E81F2B50015BA6B /* Assets.xcassets */; };
 		A72F6B6A1E81F2B50015BA6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72F6B681E81F2B50015BA6B /* LaunchScreen.storyboard */; };
@@ -15,7 +15,14 @@
 		A72F6B801E81F2B50015BA6B /* SearchMovieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B7F1E81F2B50015BA6B /* SearchMovieUITests.swift */; };
 		A72F6B8E1E81FEF50015BA6B /* MTMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */; };
 		A72F6B901E81FF060015BA6B /* MTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */; };
+		A731BC1B1E8C330900C78D29 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731BC1A1E8C330900C78D29 /* UIImageView+Extension.swift */; };
 		A7596BCC1E8B5334003DE389 /* NSError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7596BCB1E8B5334003DE389 /* NSError+Extension.swift */; };
+		A7596BCF1E8B5524003DE389 /* MTMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7596BCD1E8B5524003DE389 /* MTMovieViewController.swift */; };
+		A7596BD01E8B5524003DE389 /* MTMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7596BCE1E8B5524003DE389 /* MTMovieViewController.xib */; };
+		A7596BD61E8B595C003DE389 /* MTEmptyMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7596BD51E8B595C003DE389 /* MTEmptyMovieView.swift */; };
+		A7596BD81E8B596F003DE389 /* MTEmptyMovieView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7596BD71E8B596F003DE389 /* MTEmptyMovieView.xib */; };
+		A7596BDF1E8B7B95003DE389 /* MTMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7596BDD1E8B7B95003DE389 /* MTMovieCell.swift */; };
+		A7596BE01E8B7B95003DE389 /* MTMovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7596BDE1E8B7B95003DE389 /* MTMovieCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovieDataStore.swift; sourceTree = "<group>"; };
+		A71AF5391E82D2E900BBD264 /* MTMovieDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovieDataSource.swift; sourceTree = "<group>"; };
 		A72F6B5C1E81F2B50015BA6B /* MovieTumble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTumble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A72F6B661E81F2B50015BA6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,7 +57,14 @@
 		A72F6B811E81F2B50015BA6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovie.swift; sourceTree = "<group>"; };
 		A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTAPIClient.swift; sourceTree = "<group>"; };
+		A731BC1A1E8C330900C78D29 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		A7596BCB1E8B5334003DE389 /* NSError+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Extension.swift"; sourceTree = "<group>"; };
+		A7596BCD1E8B5524003DE389 /* MTMovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovieViewController.swift; sourceTree = "<group>"; };
+		A7596BCE1E8B5524003DE389 /* MTMovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTMovieViewController.xib; sourceTree = "<group>"; };
+		A7596BD51E8B595C003DE389 /* MTEmptyMovieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTEmptyMovieView.swift; sourceTree = "<group>"; };
+		A7596BD71E8B596F003DE389 /* MTEmptyMovieView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTEmptyMovieView.xib; sourceTree = "<group>"; };
+		A7596BDD1E8B7B95003DE389 /* MTMovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTMovieCell.swift; sourceTree = "<group>"; };
+		A7596BDE1E8B7B95003DE389 /* MTMovieCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTMovieCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +115,17 @@
 		A72F6B5E1E81F2B50015BA6B /* SearchMovie */ = {
 			isa = PBXGroup;
 			children = (
+				A7596BDD1E8B7B95003DE389 /* MTMovieCell.swift */,
+				A7596BDE1E8B7B95003DE389 /* MTMovieCell.xib */,
+				A7596BD51E8B595C003DE389 /* MTEmptyMovieView.swift */,
+				A7596BD71E8B596F003DE389 /* MTEmptyMovieView.xib */,
+				A7596BCD1E8B5524003DE389 /* MTMovieViewController.swift */,
+				A7596BCE1E8B5524003DE389 /* MTMovieViewController.xib */,
 				A72F6B8D1E81FEF50015BA6B /* MTMovie.swift */,
 				A72F6B8F1E81FF060015BA6B /* MTAPIClient.swift */,
-				A71AF5391E82D2E900BBD264 /* MTMovieDataStore.swift */,
+				A71AF5391E82D2E900BBD264 /* MTMovieDataSource.swift */,
 				A7596BCB1E8B5334003DE389 /* NSError+Extension.swift */,
+				A731BC1A1E8C330900C78D29 /* UIImageView+Extension.swift */,
 				A72F6B5F1E81F2B50015BA6B /* AppDelegate.swift */,
 				A72F6B661E81F2B50015BA6B /* Assets.xcassets */,
 				A72F6B681E81F2B50015BA6B /* LaunchScreen.storyboard */,
@@ -242,6 +263,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A72F6B6A1E81F2B50015BA6B /* LaunchScreen.storyboard in Resources */,
+				A7596BE01E8B7B95003DE389 /* MTMovieCell.xib in Resources */,
+				A7596BD81E8B596F003DE389 /* MTEmptyMovieView.xib in Resources */,
+				A7596BD01E8B5524003DE389 /* MTMovieViewController.xib in Resources */,
 				A72F6B671E81F2B50015BA6B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,9 +292,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A72F6B8E1E81FEF50015BA6B /* MTMovie.swift in Sources */,
-				A71AF53A1E82D2E900BBD264 /* MTMovieDataStore.swift in Sources */,
+				A71AF53A1E82D2E900BBD264 /* MTMovieDataSource.swift in Sources */,
 				A72F6B901E81FF060015BA6B /* MTAPIClient.swift in Sources */,
+				A731BC1B1E8C330900C78D29 /* UIImageView+Extension.swift in Sources */,
+				A7596BD61E8B595C003DE389 /* MTEmptyMovieView.swift in Sources */,
 				A7596BCC1E8B5334003DE389 /* NSError+Extension.swift in Sources */,
+				A7596BDF1E8B7B95003DE389 /* MTMovieCell.swift in Sources */,
+				A7596BCF1E8B5524003DE389 /* MTMovieViewController.swift in Sources */,
 				A72F6B601E81F2B50015BA6B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

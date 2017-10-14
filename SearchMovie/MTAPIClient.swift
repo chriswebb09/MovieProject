@@ -17,15 +17,21 @@ class MTAPIClient {
     
     static func downloadImage(url: URL, completion: @escaping (_ image: UIImage?, _ error: Error? ) -> Void) {
         if let cachedImage = imageCache.object(forKey: url.absoluteString as NSString) {
-            completion(cachedImage, nil)
+            DispatchQueue.main.async {
+                completion(cachedImage, nil)
+            }
+            
         } else {
             MTAPIClient.downloadData(url: url) { data, response, error in
                 if let error = error {
                     completion(nil, error)
                     
                 } else if let data = data, let image = UIImage(data: data) {
-                    imageCache.setObject(image, forKey: url.absoluteString as NSString)
-                    completion(image, nil)
+                    DispatchQueue.main.async {
+                        imageCache.setObject(image, forKey: url.absoluteString as NSString)
+                        completion(image, nil)
+                    }
+                    
                 } else {
                     completion(nil, NSError.generalParsingError(domain: url.absoluteString))
                 }
@@ -33,7 +39,7 @@ class MTAPIClient {
         }
     }
     
-    static func search(for query: String, page: Int, completion: @escaping (_ responseObject: [String : Any]?, _ error: Error?) -> Void) {
+    static func search(for query: String, page: Int, completion: @escaping (_ responseObject: JSON?, _ error: Error?) -> Void) {
         if let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
             let url = URL(string:"http://www.omdbapi.com/?s=\(encodedQuery)&page=\(page)") {
             MTAPIClient.downloadData(url: url) { data, response, error in
@@ -41,7 +47,10 @@ class MTAPIClient {
                     completion(nil, error)
                 } else {
                     if let data = data, let responseObject = self.convertToJSON(with: data) {
-                        completion(responseObject, nil)
+                        DispatchQueue.main.async {
+                            completion(responseObject, nil)
+                        }
+                        
                     } else {
                         completion(nil, NSError.generalParsingError(domain: url.absoluteString))
                     }
